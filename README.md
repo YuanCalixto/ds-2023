@@ -9,7 +9,7 @@ Esta API será construída pelos componentes do grupo:
 |Matrícula|Nome|Usuário Git|
 |---|---|---|
 |202105031|Gabriel Guimarães Cordeiro Bispo|[gabrielgcb](https://github.com/gabrielgcb)|
-|202108001|Kauã Júnio da Silva Lima |[Robert-Martins](https://github.com/kauajuno)|
+|202108001|Kauã Júnio da Silva Lima |[kauajuno ](https://github.com/kauajuno)|
 |202105057|Yuan Andrade Calixto dos Santos|[YuanCalixto](https://github.com/YuanCalixto)|
 
 ### Casos de Uso
