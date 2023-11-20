@@ -16,52 +16,53 @@ Esta API será construída pelos componentes do grupo:
 
 <details><summary>Clique para ver mais</summary>
 
-## UC001 - Registrar e Visualizar Tarefas
-- Eu, como usuário, quero poder registrar tarefas e visualizá-las na tela para lembrar-me dos meus afazeres.
+1. **UC001 - Registrar e Visualizar Tarefas**
+   - Eu, como usuário, quero poder registrar tarefas e visualizá-las na tela para lembrar-me dos meus afazeres.
 
-## UC002 - Atribuir Título e Descrição às Tarefas
-- Eu, como usuário, desejo atribuir título e descrição às minhas tarefas para visualizá-las de forma compacta (apenas título) ou detalhada (com título e descrição).
+2. **UC002 - Atribuir Título e Descrição às Tarefas**
+   - Eu, como usuário, desejo atribuir título e descrição às minhas tarefas para visualizá-las de forma compacta (apenas título) ou detalhada (com título e descrição).
 
-## UC003 - Criar Diferentes Listas de Tarefas
-- Eu, como usuário, quero criar diferentes listas contendo tarefas distintas para manter um ambiente mais organizado.
+3. **UC003 - Criar Diferentes Listas de Tarefas**
+   - Eu, como usuário, quero criar diferentes listas contendo tarefas distintas para manter um ambiente mais organizado.
 
-## UC004 - Assinalar/Desassinalar Tarefas Concluídas
-- Eu, como usuário, quero assinalar ou desassinalar uma tarefa como concluída para manter controle do que eu fiz e do que eu não fiz.
+4. **UC004 - Assinalar/Desassinalar Tarefas Concluídas**
+   - Eu, como usuário, quero assinalar ou desassinalar uma tarefa como concluída para manter controle do que eu fiz e do que eu não fiz.
 
-## UC005 - Excluir Tarefas
-- Eu, como usuário, quero excluir tarefas para evitar um flood de tarefas que não me interessam mais.
+5. **UC005 - Excluir Tarefas**
+   - Eu, como usuário, quero excluir tarefas para evitar um flood de tarefas que não me interessam mais.
 
-## UC006 - Registrar Horário Limite de Conclusão
-- Eu, como usuário, quero ter a opção de registrar um horário até o qual uma tarefa possa ser concluída.
+6. **UC006 - Registrar Horário Limite de Conclusão**
+   - Eu, como usuário, quero ter a opção de registrar um horário até o qual uma tarefa possa ser concluída.
 
-## UC007 - Receber Aviso de Tempo Limite
-- Eu, como usuário, quero ser avisado quando o tempo limite de conclusão de uma tarefa esteja se aproximando.
+7. **UC007 - Receber Aviso de Tempo Limite**
+   - Eu, como usuário, quero ser avisado quando o tempo limite de conclusão de uma tarefa esteja se aproximando.
 
-## UC008 - Visualizar Tarefas em Ordem de Tempo Limite
-- Eu, como usuário, quero ver as tarefas em ordem de tempo limite de conclusão para saber o que priorizar.
+8. **UC008 - Visualizar Tarefas em Ordem de Tempo Limite**
+   - Eu, como usuário, quero ver as tarefas em ordem de tempo limite de conclusão para saber o que priorizar.
 
-## UC009 - Pesquisar Tarefas pelo Título
-- Eu, como usuário, quero pesquisar tarefas pelo título para achá-las com mais facilidade em meio a uma quantidade massiva de tarefas.
+9. **UC009 - Pesquisar Tarefas pelo Título**
+   - Eu, como usuário, quero pesquisar tarefas pelo título para achá-las com mais facilidade em meio a uma quantidade massiva de tarefas.
 
-## UC010 - Disponibilizar Lista de Tarefas para Outros Usuários
-- Eu, como usuário, gostaria de disponibilizar listas de tarefas para outros usuários, a fim de ocorrer uma colaboração.
+10. **UC010 - Disponibilizar Lista de Tarefas para Outros Usuários**
+    - Eu, como usuário, gostaria de disponibilizar listas de tarefas para outros usuários, a fim de ocorrer uma colaboração.
 
-## UC011 - Adicionar Etiquetas às Tarefas
-- Eu, como usuário, desejo adicionar etiquetas às tarefas para classificá-las com base em sua urgência, permitindo priorizar de forma eficaz.
+11. **UC011 - Adicionar Etiquetas às Tarefas**
+    - Eu, como usuário, desejo adicionar etiquetas às tarefas para classificá-las com base em sua urgência, permitindo priorizar de forma eficaz.
 
-## UC012 - Login na Conta
-- Eu, como usuário, desejo logar na minha própria conta para ter acesso às minhas tarefas de múltiplos lugares diferentes.
+12. **UC012 - Login na Conta**
+    - Eu, como usuário, desejo logar na minha própria conta para ter acesso às minhas tarefas de múltiplos lugares diferentes.
 
-## UC013 - Adicionar Amigos à Lista
-- Eu, como usuário, desejo adicionar outros usuários a uma lista de amigos para partilharmos de uma mesma lista de tarefas.
+13. **UC013 - Adicionar Amigos à Lista**
+    - Eu, como usuário, desejo adicionar outros usuários a uma lista de amigos para partilharmos de uma mesma lista de tarefas.
 
-## UC014 - Configurar Listas como Privadas ou Compartilhadas
-- Eu, como usuário, desejo configurar listas como privadas ou compartilhadas para poder partilhar de uma mesma lista de tarefas com outras pessoas.
+14. **UC014 - Configurar Listas como Privadas ou Compartilhadas**
+    - Eu, como usuário, desejo configurar listas como privadas ou compartilhadas para poder partilhar de uma mesma lista de tarefas com outras pessoas.
 
-## UC015 - Selecionar Amigos para Compartilhar Listas
-- Eu, como usuário, pretendo selecionar amigos com os quais irei partilhar uma determinada lista de tarefas caso esta seja compartilhada.
+15. **UC015 - Selecionar Amigos para Compartilhar Listas**
+    - Eu, como usuário, pretendo selecionar amigos com os quais irei partilhar uma determinada lista de tarefas caso esta seja compartilhada.
 
 </details>
+
 
 <br>
 
@@ -78,13 +79,14 @@ Esta API será construída pelos componentes do grupo:
 
 <details><summary>Clique para ver mais</summary>
 
-RNF001 - A aplicação deve ser responsiva e se adaptar a diferentes tamanhos de tela sem apresentar uma UI de baixa qualidade.
-RNF002 - A aplicação deve levar menos de 5 segundos para abrir.
-RNF003 - A aplicação deve seguir padrão de design do Google (Material Design 3).
-RNF004 - A aplicação deve possuir opção de tema que se adeque melhor ao horário no qual o usuário abre a aplicação (modo claro e modo escuro);
-RNF005 - A aplicação deve ser capaz de lidar com vários usuários simultâneos. 
+1. **RNF001 - A aplicação deve ser responsiva e se adaptar a diferentes tamanhos de tela sem apresentar uma UI de baixa qualidade.**
+2. **RNF002 - A aplicação deve levar menos de 5 segundos para abrir.**
+3. **RNF003 - A aplicação deve seguir padrão de design do Google (Material Design 3).**
+4. **RNF004 - A aplicação deve possuir opção de tema que se adeque melhor ao horário no qual o usuário abre a aplicação (modo claro e modo escuro).**
+5. **RNF005 - A aplicação deve ser capaz de lidar com vários usuários simultâneos.**
 
 </details>
+
 
 <br>
 
