@@ -16,22 +16,50 @@ Esta API será construída pelos componentes do grupo:
 
 <details><summary>Clique para ver mais</summary>
 
-UC001 - Eu como usuário quero registrar tarefas e poder visualizá-las na tela para poder me lembrar dos meus afazeres.
-UC002 - Eu como usuário quero atribuir título e descrição às minhas tarefas para visualizar uma tarefa tanto num contexto compacto (visualizar um conjunto de tarefas somente com um título) quanto num contexto detalhado (visualizar título e descrição de uma única tarefa).
-UC003 - Eu como usuário quero criar diferentes listas que contenham diferentes tarefas para manter um ambiente mais organizado.
-UC004 - Eu como usuário quero assinalar ou desassinalar uma tarefa como concluída para manter controle do que eu fiz e do que eu não fiz.
-UC005 - Eu como usuário quero excluir tarefas para evitar um flood de tarefas que não me interessam mais.
-UC006 - Eu como usuário quero ter a opção de registrar um horário até o qual uma tarefa possa ser concluída.
-UC007 - Eu como usuário quero ser avisado quando o tempo limite de conclusão de uma tarefa esteja se aproximando.
-UC008 - Eu como usuário quero ver as tarefas em ordem de tempo limite de conclusão para saber o que priorizar.
-UC009 - Eu como usuário quero pesquisar tarefas pelo título para achá-las com mais facilidade em meio a uma quantidade massiva de tarefas.
-UC010 - Eu como usuário gostaria de disponibilizar lista de tarefas para outros usuários, a fim de ocorrer uma colaboração. 
-UC011 - Eu como usuário desejo adicionar etiquetas às tarefas para classificá-las com base em sua urgência, permitindo priorizar de forma eficaz.  
-UC012 - Eu como usuário desejo logar na minha própria conta para ter acesso às minhas tarefas de múltiplos lugares diferentes
-UC013 - Eu como usuário desejo adicionar outros usuários a uma lista de amigos para partilharmos de uma mesma lista de tarefas
-UC014 - Eu como usuário desejo configurar listas como privadas ou compartilhadas para poder partilhar de uma mesma lista de tarefas com outras pessoas
-UC015 - Eu como usuário pretendo selecionar amigos com os quais irei partilhar uma determinada lista de tarefas caso esta seja compartilhada
+## UC001 - Registrar e Visualizar Tarefas
+- Eu, como usuário, quero poder registrar tarefas e visualizá-las na tela para lembrar-me dos meus afazeres.
 
+## UC002 - Atribuir Título e Descrição às Tarefas
+- Eu, como usuário, desejo atribuir título e descrição às minhas tarefas para visualizá-las de forma compacta (apenas título) ou detalhada (com título e descrição).
+
+## UC003 - Criar Diferentes Listas de Tarefas
+- Eu, como usuário, quero criar diferentes listas contendo tarefas distintas para manter um ambiente mais organizado.
+
+## UC004 - Assinalar/Desassinalar Tarefas Concluídas
+- Eu, como usuário, quero assinalar ou desassinalar uma tarefa como concluída para manter controle do que eu fiz e do que eu não fiz.
+
+## UC005 - Excluir Tarefas
+- Eu, como usuário, quero excluir tarefas para evitar um flood de tarefas que não me interessam mais.
+
+## UC006 - Registrar Horário Limite de Conclusão
+- Eu, como usuário, quero ter a opção de registrar um horário até o qual uma tarefa possa ser concluída.
+
+## UC007 - Receber Aviso de Tempo Limite
+- Eu, como usuário, quero ser avisado quando o tempo limite de conclusão de uma tarefa esteja se aproximando.
+
+## UC008 - Visualizar Tarefas em Ordem de Tempo Limite
+- Eu, como usuário, quero ver as tarefas em ordem de tempo limite de conclusão para saber o que priorizar.
+
+## UC009 - Pesquisar Tarefas pelo Título
+- Eu, como usuário, quero pesquisar tarefas pelo título para achá-las com mais facilidade em meio a uma quantidade massiva de tarefas.
+
+## UC010 - Disponibilizar Lista de Tarefas para Outros Usuários
+- Eu, como usuário, gostaria de disponibilizar listas de tarefas para outros usuários, a fim de ocorrer uma colaboração.
+
+## UC011 - Adicionar Etiquetas às Tarefas
+- Eu, como usuário, desejo adicionar etiquetas às tarefas para classificá-las com base em sua urgência, permitindo priorizar de forma eficaz.
+
+## UC012 - Login na Conta
+- Eu, como usuário, desejo logar na minha própria conta para ter acesso às minhas tarefas de múltiplos lugares diferentes.
+
+## UC013 - Adicionar Amigos à Lista
+- Eu, como usuário, desejo adicionar outros usuários a uma lista de amigos para partilharmos de uma mesma lista de tarefas.
+
+## UC014 - Configurar Listas como Privadas ou Compartilhadas
+- Eu, como usuário, desejo configurar listas como privadas ou compartilhadas para poder partilhar de uma mesma lista de tarefas com outras pessoas.
+
+## UC015 - Selecionar Amigos para Compartilhar Listas
+- Eu, como usuário, pretendo selecionar amigos com os quais irei partilhar uma determinada lista de tarefas caso esta seja compartilhada.
 
 </details>
 
