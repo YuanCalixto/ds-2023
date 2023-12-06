@@ -98,11 +98,12 @@ Esta API será construída pelos componentes do grupo:
 <br>
 
 ### Tecnologia de _Front-end_
-
-
+Angular
 <br>
 
 ### Tecnologia de _Back-end_
+
+API REST utilizando Java com Spring Boot
 
 
 <br>
