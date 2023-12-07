@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tarefas.component.css']
 })
 export class TarefasComponent implements OnInit {
-adicionarTarefa() {
-throw new Error('Method not implemented.');
-}
+  adicionarTarefa() {
+    throw new Error('Method not implemented.');
+  }
 
   tarefasFaculdade = [
     { nome: 'Fazer trabalhos', feita: false },
@@ -22,9 +22,7 @@ throw new Error('Method not implemented.');
     { nome: 'Visitar a Kauä', feita: false }
   ];
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   removerTarefa(tarefa: any): void {
     const index = this.tarefasFaculdade.indexOf(tarefa);
@@ -32,6 +30,4 @@ throw new Error('Method not implemented.');
       this.tarefasFaculdade.splice(index, 1);
     }
   }
-
-
 }

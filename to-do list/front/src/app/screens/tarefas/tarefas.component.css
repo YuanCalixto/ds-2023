@@ -1,27 +1,26 @@
 .container {
     width: 500px;
     margin: 0 auto;
-  }  
+}
 
-  .title {
+.title {
     color: #000000;
     font-size: 1.5em;
     font-weight: 500;
-  }
+}
 
-  .list-item {
+.list-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-  }
-  
-  .icon-container {
-    float: right;
-  }
-  
+}
 
-  .adicionar-button {
+.icon-container {
+    float: right;
+}
+
+.adicionar-button {
     margin-left: 87%;
     align-items: center;
     padding: auto;
@@ -32,31 +31,27 @@
     margin-top: 16px;
     margin-bottom: 16px;
     cursor: pointer;
-  }
+}
 
-  .adicionar-button mat-icon {
+.adicionar-button mat-icon {
     margin-right: 80px;
-  }
+}
 
-  @media only screen and (max-width: 768px) {
- 
+@media only screen and (max-width: 768px) {
     .adicionar-button {
-      margin-left: 87%;
-      align-items: center;
-      padding: auto;
-      border: none;
-      border-radius: 4px;
-      color: rgb(255, 255, 255);
-      background-color: rgb(0, 128, 90);
-      margin-top: 16px;
-      margin-bottom: 16px;
-      cursor: pointer;
+        margin-left: 87%;
+        align-items: center;
+        padding: auto;
+        border: none;
+        border-radius: 4px;
+        color: rgb(255, 255, 255);
+        background-color: rgb(0, 128, 90);
+        margin-top: 16px;
+        margin-bottom: 16px;
+        cursor: pointer;
     }
-  
+
     .adicionar-button mat-icon {
-      margin-right: 0;
+        margin-right: 0;
     }
-  }
-  
-  
-  
+}

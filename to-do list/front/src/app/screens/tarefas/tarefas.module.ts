@@ -6,20 +6,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { TarefasRoutingModule } from './tarefas-routing.module';
 
-
 @NgModule({
   declarations: [
     TarefasComponent,
   ],
   imports: [
     CommonModule,
-    MaterialModule,
-    FormsModule,
-    MatCheckboxModule,
-    TarefasRoutingModule
-  ],
-  exports: [
-    TarefasComponent,
-  ],
+    MaterialModule
+  ]
 })
 export class TarefasModule { }
