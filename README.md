@@ -12,6 +12,17 @@ Esta API será construída pelos componentes do grupo:
 |202105041|Kauã Júnio da Silva Lima |[kauajuno ](https://github.com/kauajuno)|
 |202105057|Yuan Andrade Calixto dos Santos|[YuanCalixto](https://github.com/YuanCalixto)|
 
+### Protótipos
+
+<details><summary>Clique para ver mais</summary>
+
+<br>
+
+[**Tela Principal**](https://www.figma.com/file/6S946N1gpzUBgwLF1vAFNh/✅Pronto?type=design&node-id=30-2&mode=design)
+
+</details>
+
+
 ### Casos de Uso
 
 <details><summary>Clique para ver mais</summary>
