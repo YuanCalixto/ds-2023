@@ -1,34 +1,19 @@
 <div class="container">
-    <mat-toolbar color="primary">
-      <h1>Lista de Tarefas</h1>
-    </mat-toolbar>
-  
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Faculdade</mat-card-title>
-      </mat-card-header>
-  
-      <mat-list>
-        <mat-list-item *ngFor="let tarefa of tarefasFaculdade">
-          <mat-checkbox [(ngModel)]="tarefa.feita">
-            {{tarefa.nome}}
-          </mat-checkbox>
-        </mat-list-item>
-      </mat-list>
-    </mat-card>
-  
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Amigos</mat-card-title>
-      </mat-card-header>
-  
-      <mat-list>
-        <mat-list-item *ngFor="let tarefa of tarefasAmigos">
-          <mat-checkbox [(ngModel)]="tarefa.feita">
-            {{tarefa.nome}}
-          </mat-checkbox>
-        </mat-list-item>
-      </mat-list>
-    </mat-card>
-  </div>
-  
+  <mat-toolbar color="white">
+    <mat-card-title class="title">Faculdade</mat-card-title>
+  </mat-toolbar>
+
+  <mat-card>
+    <mat-list>
+      <mat-list-item *ngFor="let tarefa of tarefasFaculdade" class="list-item">
+        <mat-checkbox [(ngModel)]="tarefa.feita">{{ tarefa.nome }}</mat-checkbox>
+        <button class="icon-container" mat-icon-button (click)="removerTarefa(tarefa)">
+          <mat-icon>{{ 'delete' }}</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+    <button class="adicionar-button" mat-icon-button color="primary" (click)="adicionarTarefa()">
+      <mat-icon>{{ 'add' }}</mat-icon>
+    </button>
+  </mat-card>
+</div>

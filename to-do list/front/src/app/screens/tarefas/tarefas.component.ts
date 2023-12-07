@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-tarefas',
@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./tarefas.component.css']
 })
 export class TarefasComponent implements OnInit {
+  adicionarTarefa() {
+    throw new Error('Method not implemented.');
+  }
 
   tarefasFaculdade = [
     { nome: 'Fazer trabalhos', feita: false },
@@ -21,4 +24,10 @@ export class TarefasComponent implements OnInit {
 
   ngOnInit() {}
 
+  removerTarefa(tarefa: any): void {
+    const index = this.tarefasFaculdade.indexOf(tarefa);
+    if (index !== -1) {
+      this.tarefasFaculdade.splice(index, 1);
+    }
+  }
 }
