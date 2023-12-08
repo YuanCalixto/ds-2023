@@ -12,7 +12,10 @@ import { TarefasRoutingModule } from './tarefas-routing.module';
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    MatCheckboxModule,
+    FormsModule,
+    TarefasRoutingModule
   ]
 })
 export class TarefasModule { }

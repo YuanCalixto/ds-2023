@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TemplateCarbonoModule } from './screens/template-carbono/template-carbono.module';
 
 const routes: Routes = [
   {
