@@ -1,0 +1,27 @@
+<mat-card-container class="dialog-container">
+  <mat-card class="dialog-content">
+    <mat-card-header>
+      <mat-card-title class="dialog-title">{{ tarefa.name }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field class="form-field">
+        <mat-label>Descrição</mat-label>
+        <textarea matInput [(ngModel)]="tarefa.description" rows="6" cols="55" maxlength="500"></textarea>
+      </mat-form-field>
+
+      <p>Criado em: {{ tarefa.dateCreated | date:'dd/MM/yyyy - HH:mm' }}</p>
+      <p>Criador: {{ tarefa.creator.name }}</p>
+
+      <p>Etiquetas:</p>
+      <mat-chip-list>
+        <mat-chip *ngFor="let etiqueta of tarefa.tags">{{ etiqueta }}</mat-chip>
+      </mat-chip-list>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="editarTarefa()" class="button">Editar</button>
+      <button mat-raised-button color="warn" (click)="excluirTarefa()" class="button">Excluir</button>
+    </mat-card-actions>
+  </mat-card>
+</mat-card-container>
