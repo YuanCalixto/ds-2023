@@ -1,6 +1,6 @@
 package br.com.dominiosdesoftware.todo.config;
 
-import br.com.dominiosdesoftware.todo.entity.Todo;
+import br.com.dominiosdesoftware.todo.domain.entity.Todo;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelProcessor;
