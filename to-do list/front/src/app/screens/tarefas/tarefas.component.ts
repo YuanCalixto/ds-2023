@@ -12,6 +12,7 @@ import { DetalhesTarefaDialog } from './detalhes-tarefa/detalhes-tarefa.dialog';
 export class TarefasComponent implements OnInit {
   tarefas: Tarefa[] = [];
 
+  //Um exemplo de tarefa
   tarefa: Tarefa = {
     id: 1,
     name: 'Tarefa Exemplo',
@@ -33,55 +34,100 @@ export class TarefasComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.carregarTodasTarefas();
     this.carregarExemplos();
   }
 
-  adicionarTarefa(tarefa: Tarefa, lista: Tarefa[]): void {
-    this.tarefaService.createTarefa(tarefa).subscribe(
-      (novaTarefa) => {
-        lista.push(novaTarefa);
-      },
-      (erro) => {
-        console.error('Erro ao adicionar tarefa:', erro);
+  adicionarTarefa(): void {
+    const dialogRef = this.dialog.open(DetalhesTarefaDialog, {
+      data: { tarefa: {} as Tarefa },
+      width: '500px',
+      height: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe((tarefa: Tarefa) => {
+      if (tarefa) {
+        this.tarefaService.createTarefa(tarefa).subscribe(
+          (novaTarefa) => {
+            if (!this.tarefas.some((t) => t.id === novaTarefa.id)) {
+              this.tarefas.push(novaTarefa);
+            }
+          },
+          (erro) => console.error('Erro ao adicionar tarefa:', erro)
+        );
       }
-    );
+    });
   }
 
-  adicionarTarefaExemplo(tarefa: Tarefa, lista: Tarefa[]): void {
-    lista.push(tarefa);
-  }
-
-  removerTarefa(tarefa: Tarefa, lista: Tarefa[]): void {
-    this.tarefaService.deleteTarefa(tarefa.id).subscribe(
-      () => {
-        const index = lista.indexOf(tarefa);
-        if (index !== -1) {
-          lista.splice(index, 1);
-        }
-      },
-      (erro) => {
-        console.error('Erro ao remover tarefa:', erro);
-      }
-    );
-  }
-
-  removerTarefaExemplo(tarefa: Tarefa, lista: Tarefa[]): void {
-    const index = lista.indexOf(tarefa);
-    if (index !== -1) {
-      lista.splice(index, 1);
-    }
-  }
-
-  abrirdetalhesTarefa(tarefa: Tarefa): void {
+  editarTarefa(tarefa: Tarefa): void {
     const dialogRef = this.dialog.open(DetalhesTarefaDialog, {
       data: { tarefa },
       width: '500px',
       height: '400px',
     });
 
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe((tarefaEditada: Tarefa) => {
+      if (tarefaEditada) {
+        this.tarefaService.updateTarefa(tarefa.id, tarefaEditada).subscribe(
+          (atualizadaTarefa) => {
+            const index = this.tarefas.findIndex(
+              (t) => t.id === atualizadaTarefa.id
+            );
+            if (index !== -1) {
+              this.tarefas[index] = atualizadaTarefa;
+            }
+          },
+          (erro) => console.error('Erro ao editar tarefa:', erro)
+        );
+      }
+    });
+  }
+
+  removerTarefa(tarefa: Tarefa): void {
+    this.tarefaService.deleteTarefa(tarefa.id).subscribe(
+      () => {
+        this.tarefas = this.tarefas.filter((t) => t.id !== tarefa.id);
+      },
+      (erro) => console.error('Erro ao remover tarefa:', erro)
+    );
+  }
+
+  //Exemplos
+
+  adicionarTarefaExemplo(): void {
+    const dialogRef = this.dialog.open(DetalhesTarefaDialog, {
+      data: { tarefa: {} as Tarefa },
+      width: '500px',
+      height: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe((tarefa: Tarefa) => {
+      if (tarefa) {
+        this.tarefas.push(tarefa);
+      }
+    });
+  }
+
+  editarTarefaExemplo(tarefa: Tarefa): void {
+    const dialogRef = this.dialog.open(DetalhesTarefaDialog, {
+      data: { tarefa },
+      width: '500px',
+      height: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe((tarefaEditada: Tarefa) => {
+      if (tarefaEditada) {
+        const index = this.tarefas.findIndex((t) => t.id === tarefa.id);
+        if (index !== -1) {
+          this.tarefas[index] = { ...tarefa, ...tarefaEditada };
+        }
+      }
+    });
+  }
+
+  removerTarefaExemplo(tarefa: Tarefa): void {
+    this.tarefas = this.tarefas.filter((t) => t.id !== tarefa.id);
   }
 
   private carregarTodasTarefas(): void {
@@ -96,7 +142,7 @@ export class TarefasComponent implements OnInit {
   }
 
   private carregarExemplos(): void {
-    this.adicionarTarefaExemplo(
+    const exemplos: Tarefa[] = [
       {
         id: 1,
         name: 'Fazer trabalhos',
@@ -112,9 +158,6 @@ export class TarefasComponent implements OnInit {
         },
         tags: ['Estudo', 'Trabalho'],
       },
-      this.tarefas
-    );
-    this.adicionarTarefaExemplo(
       {
         id: 2,
         name: 'Estudar para prova',
@@ -130,9 +173,6 @@ export class TarefasComponent implements OnInit {
         },
         tags: ['Estudo', 'Prova'],
       },
-      this.tarefas
-    );
-    this.adicionarTarefaExemplo(
       {
         id: 3,
         name: 'Ir à biblioteca',
@@ -148,7 +188,8 @@ export class TarefasComponent implements OnInit {
         },
         tags: ['Estudo', 'Leitura'],
       },
-      this.tarefas
-    );
+    ];
+
+    exemplos.forEach((exemplo) => this.tarefas.push(exemplo));
   }
 }

@@ -9,20 +9,20 @@
         <mat-checkbox [(ngModel)]="tarefa.completed">{{ tarefa.name }}</mat-checkbox>
         
         <!-- Botão de Edição -->
-        <button class="icon-container" mat-icon-button (click)="abrirdetalhesTarefa(tarefa)">
+        <button class="icon-container" mat-icon-button (click)="editarTarefaExemplo(tarefa)">
           <mat-icon>edit</mat-icon>
         </button>
         
         <!-- Botão de Exclusão -->
-        <button class="icon-container" mat-icon-button (click)="removerTarefaExemplo(tarefa, tarefas)">
+        <button class="icon-container" mat-icon-button (click)="removerTarefaExemplo(tarefa)">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-list-item>
     </mat-list>
     
     <!-- Botão de Adição -->
-    <button class="adicionar-button" mat-icon-button color="primary" (click)="adicionarTarefaExemplo(tarefa, tarefas)">
+    <button class="adicionar-button" mat-icon-button color="primary" (click)="adicionarTarefaExemplo()">
       <mat-icon>add</mat-icon>
-    </button>
+    </button>    
   </mat-card>
 </div>
