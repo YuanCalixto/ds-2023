@@ -5,12 +5,13 @@
 }
 
 .dialog-content {
-  max-width: 600px;
+  max-width: 80vw;
   width: 100%;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   padding: 16px;
+  margin-top: 0;
 }
 
 .dialog-title {
@@ -24,10 +25,19 @@
 }
 
 .button {
-  margin: 0 8px;
+  margin: 10px 5px 0 0;
 }
 
-.dialog-content {
-  
-  margin-top: 0;
+.full-width {
+  width: 100%;
+}
+
+.form-field {
+  margin-bottom: 16px;
+}
+
+@media (max-width: 600px) {
+  .dialog-content {
+    max-width: 95vw;
+  }
 }

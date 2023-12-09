@@ -9,6 +9,7 @@ import { DetalhesTarefaDialog } from './detalhes-tarefa/detalhes-tarefa.dialog';
   templateUrl: './tarefas.component.html',
   styleUrls: ['./tarefas.component.css'],
 })
+
 export class TarefasComponent implements OnInit {
   tarefas: Tarefa[] = [];
 
@@ -61,6 +62,7 @@ export class TarefasComponent implements OnInit {
         );
       }
     });
+    this.carregarTodasTarefas();
   }
 
   editarTarefa(tarefa: Tarefa): void {
@@ -85,6 +87,7 @@ export class TarefasComponent implements OnInit {
         );
       }
     });
+    this.carregarTodasTarefas();
   }
 
   removerTarefa(tarefa: Tarefa): void {
