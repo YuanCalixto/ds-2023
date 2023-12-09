@@ -19,7 +19,7 @@
 
       <p>Etiquetas:</p>
       <mat-chip-list>
-        <mat-chip *ngFor="let etiqueta of tarefa.tags">{{ etiqueta }}</mat-chip>
+        <mat-chip *ngFor="let etiqueta of tarefa.tags">{{ etiqueta.name }}</mat-chip>
       </mat-chip-list>
     </mat-card-content>
 

@@ -26,7 +26,10 @@ export class TarefasComponent implements OnInit {
       dateCreated: new Date(),
       amigos: [],
     },
-    tags: ['Saúde', 'Compras'],
+    tags: [
+      { id: 1, name: 'Saúde', dateCreated: new Date() },
+      { id: 2, name: 'Compras', dateCreated: new Date() },
+    ],
   };
 
   constructor(
@@ -156,7 +159,10 @@ export class TarefasComponent implements OnInit {
           dateCreated: new Date(),
           amigos: [],
         },
-        tags: ['Estudo', 'Trabalho'],
+        tags: [
+          { id: 3, name: 'Estudo', dateCreated: new Date() },
+          { id: 4, name: 'Trabalho', dateCreated: new Date() },
+        ],
       },
       {
         id: 2,
@@ -171,7 +177,10 @@ export class TarefasComponent implements OnInit {
           dateCreated: new Date(),
           amigos: [],
         },
-        tags: ['Estudo', 'Prova'],
+        tags: [
+          { id: 5, name: 'Estudo', dateCreated: new Date() },
+          { id: 6, name: 'Prova', dateCreated: new Date() },
+        ],
       },
       {
         id: 3,
@@ -186,7 +195,7 @@ export class TarefasComponent implements OnInit {
           dateCreated: new Date(),
           amigos: [],
         },
-        tags: ['Estudo', 'Leitura'],
+        tags: [],
       },
     ];
 

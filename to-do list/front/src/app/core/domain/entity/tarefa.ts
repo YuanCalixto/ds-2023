@@ -1,3 +1,4 @@
+import { Tag } from "./tag";
 import { Usuario } from "./usuario";
 
 export interface Tarefa {
@@ -8,6 +9,6 @@ export interface Tarefa {
     creator: Usuario;
     dateCreated: Date;
     lastUpdated: Date;
-    tags: string[];
+    tags: Tag[];
   }
   
