@@ -1,33 +1,91 @@
 import { Component, OnInit } from '@angular/core';
+import { Tarefa } from 'src/app/core/domain/entity/tarefa';
+import { TarefaService } from 'src/app/core/domain/service/tarefa.service';
 
 @Component({
   selector: 'app-tarefas',
   templateUrl: './tarefas.component.html',
-  styleUrls: ['./tarefas.component.css']
+  styleUrls: ['./tarefas.component.css'],
 })
 export class TarefasComponent implements OnInit {
-  adicionarTarefa() {
-    throw new Error('Method not implemented.');
+
+  tarefas: Tarefa[] = [];
+
+  tarefa: Tarefa = {
+    id: 1,
+    name: 'Tarefa Exemplo',
+    completed: false,
+    description: 'Exercícios de matemática e física',
+    dateCreated: new Date(),
+    lastUpdated: new Date(),
+  };
+
+  constructor(private tarefaService: TarefaService) {}
+
+  ngOnInit() {
+    this.carregarTodasTarefas();
+    this.carregarExemplos();
   }
 
-  tarefasFaculdade = [
-    { nome: 'Fazer trabalhos', feita: false },
-    { nome: 'Estudar para prova', feita: true },
-    { nome: 'Ir à biblioteca', feita: false }
-  ];
+  adicionarTarefa(tarefa: Tarefa, lista: Tarefa[]): void {
+    this.tarefaService.createTarefa(tarefa).subscribe(
+      (novaTarefa) => {
+        lista.push(novaTarefa);
+      },
+      (erro) => {
+        console.error('Erro ao adicionar tarefa:', erro);
+      }
+    );
+  }
 
-  tarefasAmigos = [
-    { nome: 'Ligar para o Gabriel', feita: true },
-    { nome: 'Marcar encontro com o Yuan', feita: false },
-    { nome: 'Visitar a Kauä', feita: false }
-  ];
+  adicionarTarefaExemplo(tarefa: Tarefa, lista: Tarefa[]): void {
+    lista.push(tarefa);
+  }
 
-  ngOnInit() {}
+  removerTarefa(tarefa: Tarefa, lista: Tarefa[]): void {
+    this.tarefaService.deleteTarefa(tarefa.id).subscribe(
+      () => {
+        const index = lista.indexOf(tarefa);
+        if (index !== -1) {
+          lista.splice(index, 1);
+        }
+      },
+      (erro) => {
+        console.error('Erro ao remover tarefa:', erro);
+      }
+    );
+  }
 
-  removerTarefa(tarefa: any): void {
-    const index = this.tarefasFaculdade.indexOf(tarefa);
-    if (index !== -1) {
-      this.tarefasFaculdade.splice(index, 1);
-    }
+  removerTarefaExemplo(tarefa: Tarefa, lista: Tarefa[]): void {
+        const index = lista.indexOf(tarefa);
+        if (index !== -1) {
+          lista.splice(index, 1);
+        }
+      }
+
+  private carregarTodasTarefas(): void {
+    this.tarefaService.getAllTarefas().subscribe(
+      (tarefas) => {
+        this.tarefas = tarefas;
+      },
+      (erro) => {
+        console.error('Erro ao carregar todas as tarefas:', erro);
+      }
+    );
+  }
+
+  private carregarExemplos(): void {
+    this.adicionarTarefaExemplo(
+      { id: 1, name: 'Fazer trabalhos', completed: false, description: '', dateCreated: new Date(), lastUpdated: new Date() },
+      this.tarefas
+    );
+    this.adicionarTarefaExemplo(
+      { id: 2, name: 'Estudar para prova', completed: true, description: '', dateCreated: new Date(), lastUpdated: new Date() },
+      this.tarefas
+    );
+    this.adicionarTarefaExemplo(
+      { id: 3, name: 'Ir à biblioteca', completed: false, description: '', dateCreated: new Date(), lastUpdated: new Date() },
+      this.tarefas
+    );
   }
 }

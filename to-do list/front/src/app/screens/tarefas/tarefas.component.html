@@ -5,15 +5,15 @@
 
   <mat-card>
     <mat-list>
-      <mat-list-item *ngFor="let tarefa of tarefasFaculdade" class="list-item">
-        <mat-checkbox [(ngModel)]="tarefa.feita">{{ tarefa.nome }}</mat-checkbox>
-        <button class="icon-container" mat-icon-button (click)="removerTarefa(tarefa)">
-          <mat-icon>{{ 'delete' }}</mat-icon>
+      <mat-list-item *ngFor="let tarefa of tarefas" class="list-item">
+        <mat-checkbox [(ngModel)]="tarefa.completed">{{ tarefa.name }}</mat-checkbox>
+        <button class="icon-container" mat-icon-button (click)="removerTarefaExemplo(tarefa, tarefas)">
+          <mat-icon>delete</mat-icon>
         </button>
       </mat-list-item>
     </mat-list>
-    <button class="adicionar-button" mat-icon-button color="primary" (click)="adicionarTarefa()">
-      <mat-icon>{{ 'add' }}</mat-icon>
+    <button class="adicionar-button" mat-icon-button color="primary" (click)="adicionarTarefaExemplo(tarefa, tarefas)">
+      <mat-icon>add</mat-icon>
     </button>
   </mat-card>
 </div>
