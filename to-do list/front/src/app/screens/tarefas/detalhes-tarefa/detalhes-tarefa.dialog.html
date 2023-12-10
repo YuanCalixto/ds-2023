@@ -20,8 +20,12 @@
 
       <p *ngIf="tarefa.tags && tarefa.tags.length > 0">Etiquetas:</p>
       <mat-chip-list *ngIf="tarefa.tags && tarefa.tags.length > 0">
-        <mat-chip *ngFor="let etiqueta of tarefa.tags">{{ etiqueta.name }}</mat-chip>
+        <mat-chip *ngFor="let etiqueta of tarefa.tags">
+          <img matChipAvatar src="https://sigaa.sistemas.ufg.br/sigaa/verFoto?idFoto=2168447&key=2e07e5b65ce1ed3e6ba8dae7c4c1d6cd" alt="{{ etiqueta.name }}"/>
+          {{ etiqueta.name }}
+        </mat-chip>
       </mat-chip-list>
+      
     </mat-card-content>
 
     <mat-card-actions>
