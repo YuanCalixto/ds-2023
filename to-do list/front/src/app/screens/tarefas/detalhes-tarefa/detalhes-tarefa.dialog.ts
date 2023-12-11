@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Tarefa } from 'src/app/core/domain/entity/tarefa';
+import { Tasks } from 'src/app/core/domain/entity/tasks';
 
 @Component({
   selector: 'detalhes-tarefa-app',
@@ -8,22 +8,22 @@ import { Tarefa } from 'src/app/core/domain/entity/tarefa';
   styleUrls: ['./detalhes-tarefa.dialog.css'],
 })
 export class DetalhesTarefaDialog implements OnInit {
-  tarefa: Tarefa;
+  task: Tasks;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { tarefa: Tarefa },
+    @Inject(MAT_DIALOG_DATA) public data: { task: Tasks },
     private dialogRef: MatDialogRef<DetalhesTarefaDialog>
   ) {
-    this.tarefa = { ...data.tarefa };
+    this.task = { ...data.task };
   }
 
   ngOnInit() {}
 
-  editarTarefa(): void {}
+  editTask(): void {}
 
-  excluirTarefa(): void {}
+  removeTask(): void {}
 
-  salvarTarefa(): void {
-    this.dialogRef.close(this.tarefa);
+  saveTask(): void {
+    this.dialogRef.close(this.task);
   }
 }

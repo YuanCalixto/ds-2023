@@ -4,7 +4,7 @@
       <mat-card-title class="dialog-title">
         <mat-form-field class="full-width">
           <mat-label>Título</mat-label>
-          <input matInput [(ngModel)]="tarefa.name" placeholder="Digite o título da tarefa">
+          <input matInput [(ngModel)]="task.name" placeholder="Digite o título da tarefa">
         </mat-form-field>
       </mat-card-title>
     </mat-card-header>
@@ -12,15 +12,15 @@
     <mat-card-content>
       <mat-form-field class="form-field full-width">
         <mat-label>Descrição</mat-label>
-        <textarea matInput [(ngModel)]="tarefa.description" rows="6" maxlength="500"></textarea>
+        <textarea matInput [(ngModel)]="task.description" rows="6" maxlength="500"></textarea>
       </mat-form-field>
 
-      <p *ngIf="tarefa.dateCreated">Criado em: {{ tarefa.dateCreated | date:'dd/MM/yyyy - HH:mm' }}</p>
-      <p *ngIf="tarefa.creator">Criador: {{ tarefa.creator.name }}</p>
+      <p *ngIf="task.dateCreated">Criado em: {{ task.dateCreated | date:'dd/MM/yyyy - HH:mm' }}</p>
+      <p *ngIf="task.creator">Criador: {{ task.creator.name }}</p>
 
-      <p *ngIf="tarefa.tags && tarefa.tags.length > 0">Etiquetas:</p>
-      <mat-chip-list *ngIf="tarefa.tags && tarefa.tags.length > 0">
-        <mat-chip *ngFor="let etiqueta of tarefa.tags">
+      <p *ngIf="task.tags && task.tags.length > 0">Etiquetas:</p>
+      <mat-chip-list *ngIf="task.tags && task.tags.length > 0">
+        <mat-chip *ngFor="let etiqueta of task.tags">
           <img matChipAvatar src="https://sigaa.sistemas.ufg.br/sigaa/verFoto?idFoto=2168447&key=2e07e5b65ce1ed3e6ba8dae7c4c1d6cd" alt="{{ etiqueta.name }}"/>
           {{ etiqueta.name }}
         </mat-chip>
@@ -29,7 +29,7 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="salvarTarefa()" class="button" [disabled]="!tarefa.name && !tarefa.description">Salvar</button>
+      <button mat-raised-button color="primary" (click)="saveTask()" class="button" [disabled]="!task.name && !task.description">Salvar</button>
     </mat-card-actions>
   </mat-card>
 </mat-card-container>

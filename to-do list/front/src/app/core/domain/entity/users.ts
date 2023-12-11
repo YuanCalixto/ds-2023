@@ -1,7 +1,7 @@
-export interface Usuario {
+export interface Users {
     id: number;
     name: string;
     dateCreated: Date;
-    amigos: Usuario[];
+    amigos: Users[];
   }
   

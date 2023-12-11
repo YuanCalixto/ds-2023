@@ -1,9 +1,9 @@
-import { Tarefa } from "./tarefa";
+import { Tasks } from "./tasks";
 
 export interface Lists {
     id: number;
     name: string;
     dateCreated: Date;
-    tasks: Tarefa[]
+    tasks: Tasks[]
   }
   

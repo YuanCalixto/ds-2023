@@ -1,12 +1,12 @@
 import { Tag } from "./tag";
-import { Usuario } from "./usuario";
+import { Users } from "./users";
 
-export interface Tarefa {
+export interface Tasks {
     id: number;
     name: string;
     description: string;
     completed: boolean;
-    creator: Usuario;
+    creator: Users;
     dateCreated: Date;
     lastUpdated: Date;
     tags: Tag[];

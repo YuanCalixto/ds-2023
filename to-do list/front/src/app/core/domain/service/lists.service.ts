@@ -3,13 +3,13 @@ import { HandleMessageError } from '../../util/handle-message-error';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, catchError } from 'rxjs';
-import { Tarefa } from '../entity/tarefa';
+import { Lists } from '../entity/lists';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TarefaService extends HandleMessageError {
+export class ListsService extends HandleMessageError {
 
   constructor(
     private http: HttpClient,
@@ -18,28 +18,28 @@ export class TarefaService extends HandleMessageError {
     super(snackBar);
   }
 
-  getAllTarefas(): Observable<Tarefa[]> {
-    return this.http.get<Tarefa[]>(`${environment.serverURL}/tarefas`)
+  getAllLists(): Observable<Lists[]> {
+    return this.http.get<Lists[]>(`${environment.serverURL}/lists`)
       .pipe(catchError(this.capturarErro));
   }
 
-  getTarefaById(id: number): Observable<Tarefa> {
-    return this.http.get<Tarefa>(`${environment.serverURL}/tarefas/${id}`)
+  getListById(id: number): Observable<Lists> {
+    return this.http.get<Lists>(`${environment.serverURL}/lists/${id}`)
       .pipe(catchError(this.capturarErro));
   }
 
-  createTarefa(tarefa: Tarefa): Observable<Tarefa> {
-    return this.http.post<Tarefa>(`${environment.serverURL}/tarefas`, tarefa)
+  createList(list: Lists): Observable<Lists> {
+    return this.http.post<Lists>(`${environment.serverURL}/lists`, list)
       .pipe(catchError(this.capturarErro));
   }
 
-  updateTarefa(id: number, tarefa: Tarefa): Observable<Tarefa> {
-    return this.http.put<Tarefa>(`${environment.serverURL}/tarefas/${id}`, tarefa)
+  updateList(id: number, list: Lists): Observable<Lists> {
+    return this.http.put<Lists>(`${environment.serverURL}/lists/${id}`, list)
       .pipe(catchError(this.capturarErro));
   }
 
-  deleteTarefa(id: number): Observable<any> {
-    return this.http.delete(`${environment.serverURL}/tarefas/${id}`)
+  deleteList(id: number): Observable<any> {
+    return this.http.delete(`${environment.serverURL}/lists/${id}`)
       .pipe(catchError(this.capturarErro));
   }
 }

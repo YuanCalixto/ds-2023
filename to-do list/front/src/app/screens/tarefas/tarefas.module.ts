@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { TarefaService } from 'src/app/core/domain/service/tarefa.service';
+import { TasksService } from 'src/app/core/domain/service/tasks.service';
 import { MaterialModule } from 'src/app/core/material/material.module';
 import { DetalhesTarefaModule } from './detalhes-tarefa/detalhes-tarefa.module';
 import { TarefasRoutingModule } from './tarefas-routing.module';
@@ -26,6 +26,6 @@ import { TarefasComponent } from './tarefas.component';
     MatDividerModule,
     MatIconModule,
   ],
-  providers: [TarefaService],
+  providers: [TasksService],
 })
 export class TarefasModule {}
