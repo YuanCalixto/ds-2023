@@ -1,29 +1,25 @@
-<div class="container">
-    <mat-sidenav-container class="sidenav-container">
-        <!-- Sidenav Principal -->
+<mat-sidenav-container class="sidenav-container">
+    <!-- Sidenav Principal -->
 
-        <mat-sidenav mode="side" class="sidenav" [opened]="true">
-            <!-- Cabeçalho da Sidenav com Imagem -->
+    <mat-sidenav mode="side" class="sidenav" [opened]="true">
+        <!-- Cabeçalho da Sidenav com Imagem -->
 
-            <div class="sidenav-header">
-                <mat-toolbar style="background-color: rgb(255, 255, 255);">
-                    <div class="sidenav-title">
-                        Suas Listas
-                    </div>
-                    <div class="sidenav-logo">
-                        <img src="assets/images/Todo.png" width="80" alt="Logo" class="logo-img" />
-                    </div>
-                </mat-toolbar>
-                <mat-nav-list>
-                    <mat-list-item *ngFor="let list of lists">
-                        <span class="sidenav-item" (click)="onSidenavTitleClick(list.id)">{{ list.name }}</span>
-                    </mat-list-item>
-                </mat-nav-list>
-            </div>
-
-            <mat-sidenav mode="side" class="sidenav" [opened]="false">
-                <mat-nav-list> </mat-nav-list>
-            </mat-sidenav>
+        <div class="sidenav-header">
+            <mat-toolbar style="background-color: rgb(255, 255, 255);">
+                <div class="sidenav-title">
+                    Suas Listas
+                </div>
+                <div class="sidenav-logo">
+                    <img src="assets/images/Todo.png" width="80" alt="Logo" class="logo-img" />
+                </div>
+            </mat-toolbar>
+            <mat-nav-list>
+                <mat-list-item *ngFor="let list of lists" (click)="onSidenavTitleClick(list.id)">
+                    <span class="sidenav-item" >{{ list.name }}</span>
+                </mat-list-item>
+            </mat-nav-list>
+        </div>
+    </mat-sidenav>
 
             <!-- Sidenav Amigos -->
 
@@ -39,17 +35,17 @@
       </mat-nav-list>
     </mat-sidenav>
     -->
-        </mat-sidenav>
 
         <!-- Conteúdo Principal -->
 
-        <mat-sidenav-content>
-            <mat-toolbar color="white">
-                <span class="title">Faculdade</span>
-            </mat-toolbar>
+    <!-- Conteúdo Principal -->
+    <mat-sidenav-content>
+        <mat-toolbar color="white">
+            <span class="title">Faculdade</span>
+        </mat-toolbar>
 
-            <mat-card>
-                <div class="list-container">
+        <mat-card>
+            <div class="list-container">
                     <mat-list>
                         <mat-list-item *ngFor="let task of tasks" class="list-item">
                             <mat-checkbox [(ngModel)]="task.completed">{{ task.name }}</mat-checkbox>
@@ -71,5 +67,4 @@
                 </div>
             </mat-card>
         </mat-sidenav-content>
-    </mat-sidenav-container>
-</div>
+    </mat-sidenav-container>    

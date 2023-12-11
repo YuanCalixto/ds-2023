@@ -11,6 +11,7 @@ import { MaterialModule } from 'src/app/core/material/material.module';
 import { DetalhesTarefaModule } from './detalhes-tarefa/detalhes-tarefa.module';
 import { TarefasRoutingModule } from './tarefas-routing.module';
 import { TarefasComponent } from './tarefas.component';
+import { ListsService } from 'src/app/core/domain/service/lists.service';
 
 @NgModule({
   declarations: [TarefasComponent],
@@ -26,6 +27,6 @@ import { TarefasComponent } from './tarefas.component';
     MatDividerModule,
     MatIconModule,
   ],
-  providers: [TasksService],
+  providers: [ListsService, TasksService],
 })
 export class TarefasModule {}

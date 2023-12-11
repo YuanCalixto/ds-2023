@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Lists } from 'src/app/core/domain/entity/lists';
 import { Tasks } from 'src/app/core/domain/entity/tasks';
 import { Users } from 'src/app/core/domain/entity/users';
+import { ListsService } from 'src/app/core/domain/service/lists.service';
 import { TasksService } from 'src/app/core/domain/service/tasks.service';
 import { DetalhesTarefaDialog } from './detalhes-tarefa/detalhes-tarefa.dialog';
 
@@ -17,23 +18,20 @@ export class TarefasComponent implements OnInit {
   friends: Users[] = [];
 
   constructor(
+    private listsService: ListsService,
     private tasksService: TasksService,
     private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-
-    //Funcionais
-    this.loadAllTasks();
-    
-
     //Exemplos
 
-    this.loadTasksSamples();
+    this.addListsSamples();
     this.addUserSamples();
-    this.addListSample();
-    this.addListSample();
-    this.addListSample();
+
+    //Funcionais
+    this.loadAllListsByUser();
+    this.loadTasksFromFirstList();
   }
 
   private loadAllTasks(): void {
@@ -45,6 +43,35 @@ export class TarefasComponent implements OnInit {
         console.error('Erro ao carregar todas as tarefas:', error);
       }
     );
+  }
+
+  private loadAllListsByUser(): void {
+    const userId = 1; // Substituir pelo ID do usuário
+
+    this.listsService.getAllListsByUser(userId).subscribe(
+      (lists) => {
+        this.lists = lists;
+      },
+      (error) => {
+        console.error('Erro ao carregar listas do usuário:', error);
+      }
+    );
+  }
+
+  private loadTasksFromFirstList(): void {
+    const userId = 1; // Substituir pelo ID do usuário
+
+    if (this.lists.length > 0) {
+      const firstList = this.lists[0];
+
+      if (firstList.tasks) {
+        this.tasks = firstList.tasks;
+      } else {
+        console.warn('A primeira lista não possui tarefas disponíveis.');
+      }
+    } else {
+      console.warn('O usuário não possui listas disponíveis.');
+    }
   }
 
   addTask(): void {
@@ -80,9 +107,7 @@ export class TarefasComponent implements OnInit {
       if (editedTask) {
         this.tasksService.updateTasks(task.id, editedTask).subscribe(
           (updatedTask) => {
-            const index = this.tasks.findIndex(
-              (t) => t.id === updatedTask.id
-            );
+            const index = this.tasks.findIndex((t) => t.id === updatedTask.id);
             if (index !== -1) {
               this.tasks[index] = updatedTask;
             }
@@ -104,16 +129,15 @@ export class TarefasComponent implements OnInit {
   }
 
   onSidenavTitleClick(listId: number): void {
-    this.tasksService.getTasksByListId(listId).subscribe(
-      (tasks) => {
-        this.tasks = tasks;
-      },
-      (error) => {
-        console.error('Erro ao carregar tarefas da lista:', error);
-      }
-    );
+    const filteredLists = this.lists.filter((list) => list.id === listId);
+
+    if (filteredLists.length > 0) {
+      this.tasks = filteredLists[0].tasks;
+    } else {
+      console.warn('A lista selecionada não possui tarefas disponíveis.');
+    }
   }
-  
+
   // Exemplos
 
   addTaskSample(): void {
@@ -130,18 +154,18 @@ export class TarefasComponent implements OnInit {
     });
   }
 
-  editTaskSample(tarefa: Tasks): void {
+  editTaskSample(task: Tasks): void {
     const dialogRef = this.dialog.open(DetalhesTarefaDialog, {
-      data: { tarefa },
+      data: { task: task },
       width: '500px',
       height: '400px',
     });
 
     dialogRef.afterClosed().subscribe((tarefaEditada: Tasks) => {
       if (tarefaEditada) {
-        const index = this.tasks.findIndex((t) => t.id === tarefa.id);
+        const index = this.tasks.findIndex((t) => t.id === task.id);
         if (index !== -1) {
-          this.tasks[index] = { ...tarefa, ...tarefaEditada };
+          this.tasks[index] = { ...task, ...tarefaEditada };
         }
       }
     });
@@ -151,89 +175,140 @@ export class TarefasComponent implements OnInit {
     this.tasks = this.tasks.filter((t) => t.id !== tarefa.id);
   }
 
-  private loadTasksSamples(): void {
-    const exemplos: Tasks[] = [
-      {
-        id: 1,
-        name: 'Fazer trabalhos',
-        completed: false,
-        description: '',
-        dateCreated: new Date(),
-        lastUpdated: new Date(),
-        creator: {
-          id: 1,
-          name: 'Gabriel Guimarães Bispo',
-          dateCreated: new Date(),
-          amigos: [],
-        },
-        tags: [
-          { id: 3, name: 'Estudo', dateCreated: new Date() },
-          { id: 4, name: 'Trabalho', dateCreated: new Date() },
-        ],
-      },
-      {
-        id: 2,
-        name: 'Estudar para prova',
-        completed: true,
-        description: '',
-        dateCreated: new Date(),
-        lastUpdated: new Date(),
-        creator: {
-          id: 1,
-          name: 'Gabriel Guimarães Bispo',
-          dateCreated: new Date(),
-          amigos: [],
-        },
-        tags: [
-          { id: 5, name: 'Estudo', dateCreated: new Date() },
-          { id: 6, name: 'Prova', dateCreated: new Date() },
-        ],
-      },
-      {
-        id: 3,
-        name: 'Ir à biblioteca',
-        completed: false,
-        description: '',
-        dateCreated: new Date(),
-        lastUpdated: new Date(),
-        creator: {
-          id: 1,
-          name: 'Gabriel Guimarães Bispo',
-          dateCreated: new Date(),
-          amigos: [],
-        },
-        tags: [],
-      },
-    ];
-
-    exemplos.forEach((exemplo) => this.tasks.push(exemplo));
-  }
-
-  addListSample(): void {
-    const listaExemplo: Lists = {
+  addListsSamples(): void {
+    const listaExemplo1: Lists = {
       id: this.lists.length + 1,
-      name: 'Lista Exemplo ' + (this.lists.length + 1),
+      name: 'Tarefas da Semana',
       dateCreated: new Date(),
       tasks: [
         {
           id: 1,
-          name: 'Tarefa 1',
-          description: 'Descrição da Tarefa 1',
+          name: 'Fazer compras no supermercado',
+          description: 'Comprar os itens essenciais para a semana',
           completed: false,
           creator: {
             id: 1,
-            name: 'Usuário Exemplo',
+            name: 'Gabriel Guimarães Bispo',
             dateCreated: new Date(),
             amigos: [],
           },
           dateCreated: new Date(),
           lastUpdated: new Date(),
-          tags: [],
+          tags: [
+            { id: 1, name: 'Compras', dateCreated: new Date() },
+            { id: 2, name: 'Essencial', dateCreated: new Date() },
+          ],
+        },
+        {
+          id: 2,
+          name: 'Ir ao banco',
+          description: 'Pagar contas e fazer depósitos',
+          completed: false,
+          creator: {
+            id: 1,
+            name: 'Gabriel Guimarães Bispo',
+            dateCreated: new Date(),
+            amigos: [],
+          },
+          dateCreated: new Date(),
+          lastUpdated: new Date(),
+          tags: [
+            { id: 3, name: 'Banco', dateCreated: new Date() },
+            { id: 4, name: 'Contas', dateCreated: new Date() },
+          ],
+        },
+        {
+          id: 3,
+          name: 'Limpar a casa',
+          description: 'Varrer, passar pano e lavar a louça',
+          completed: false,
+          creator: {
+            id: 1,
+            name: 'Gabriel Guimarães Bispo',
+            dateCreated: new Date(),
+            amigos: [],
+          },
+          dateCreated: new Date(),
+          lastUpdated: new Date(),
+          tags: [
+            { id: 5, name: 'Limpeza', dateCreated: new Date() },
+            { id: 6, name: 'Casa', dateCreated: new Date() },
+          ],
         },
       ],
     };
 
-    this.lists.push(listaExemplo);
+    const listaExemplo2: Lists = {
+      id: this.lists.length + 2,
+      name: 'Tarefas do Trabalho',
+      dateCreated: new Date(),
+      tasks: [
+        {
+          id: 1,
+          name: 'Preparar apresentação para reunião',
+          description: 'Revisar os slides e preparar notas',
+          completed: false,
+          creator: {
+            id: 1,
+            name: 'Gabriel Guimarães Bispo',
+            dateCreated: new Date(),
+            amigos: [],
+          },
+          dateCreated: new Date(),
+          lastUpdated: new Date(),
+          tags: [
+            { id: 7, name: 'Apresentação', dateCreated: new Date() },
+            { id: 8, name: 'Reunião', dateCreated: new Date() },
+          ],
+        },
+        {
+          id: 2,
+          name: 'Responder e-mails',
+          description: 'Responder às solicitações e dúvidas dos clientes',
+          completed: false,
+          creator: {
+            id: 1,
+            name: 'Gabriel Guimarães Bispo',
+            dateCreated: new Date(),
+            amigos: [],
+          },
+          dateCreated: new Date(),
+          lastUpdated: new Date(),
+          tags: [
+            { id: 9, name: 'E-mail', dateCreated: new Date() },
+            { id: 10, name: 'Clientes', dateCreated: new Date() },
+          ],
+        },
+      ],
+    };
+
+    const listaExemplo3: Lists = {
+      id: this.lists.length + 3,
+      name: 'Tarefas da Faculdade',
+      dateCreated: new Date(),
+      tasks: [
+        {
+          id: 1,
+          name: 'Finalizar o trabalho de Domínios',
+          description: 'Integrar o Back e o Front',
+          completed: false,
+          creator: {
+            id: 1,
+            name: 'Gabriel Guimarães Bispo',
+            dateCreated: new Date(),
+            amigos: [],
+          },
+          dateCreated: new Date(),
+          lastUpdated: new Date(),
+          tags: [
+            { id: 11, name: 'Faculdade', dateCreated: new Date() },
+            { id: 12, name: 'Domínios', dateCreated: new Date() },
+          ],
+        },
+      ],
+    };
+
+    this.lists.push(listaExemplo1, listaExemplo2, listaExemplo3);
   }
 
   addUserSamples(): void {

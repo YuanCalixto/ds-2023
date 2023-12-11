@@ -23,6 +23,11 @@ export class ListsService extends HandleMessageError {
       .pipe(catchError(this.capturarErro));
   }
 
+  getAllListsByUser(userId: number): Observable<Lists[]> {
+    return this.http.get<Lists[]>(`${environment.serverURL}/lists?userId=${userId}`)
+      .pipe(catchError(this.capturarErro));
+  }
+
   getListById(id: number): Observable<Lists> {
     return this.http.get<Lists>(`${environment.serverURL}/lists/${id}`)
       .pipe(catchError(this.capturarErro));
