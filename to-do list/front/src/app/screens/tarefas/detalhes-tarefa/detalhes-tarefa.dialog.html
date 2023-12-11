@@ -1,6 +1,6 @@
 <mat-card-container class="dialog-container">
   <mat-card class="dialog-content">
-    
+
     <mat-card-header>
       <mat-card-title class="dialog-title">
         <mat-form-field class="full-width" align="start" style="width: 140%">
@@ -9,7 +9,6 @@
         </mat-form-field>
       </mat-card-title>
     </mat-card-header>
-    
 
     <mat-card-content>
       <mat-form-field class="form-field full-width">
@@ -17,17 +16,27 @@
         <textarea matInput [(ngModel)]="task.description" rows="6" maxlength="500"></textarea>
       </mat-form-field>
 
-      <p *ngIf="task.dateCreated">Criado em: {{ task.dateCreated | date:'dd/MM/yyyy - HH:mm' }}</p>
+      <p *ngIf="task.dateCreated">Criado em: {{ task.dateCreated | date: 'dd/MM/yyyy - HH:mm' }}</p>
       <p *ngIf="task.creator">Criador: {{ task.creator.name }}</p>
 
       <p *ngIf="task.tags && task.tags.length > 0">Etiquetas:</p>
       <mat-chip-list *ngIf="task.tags && task.tags.length > 0">
-        <mat-chip *ngFor="let etiqueta of task.tags">
-          <img matChipAvatar src="https://sigaa.sistemas.ufg.br/sigaa/verFoto?idFoto=2168447&key=2e07e5b65ce1ed3e6ba8dae7c4c1d6cd" alt="{{ etiqueta.name }}"/>
-          {{ etiqueta.name }}
+        <mat-chip *ngFor="let tag of task.tags" [removable]="true" (removed)="removeTag(tag)">
+          <img matChipAvatar src="https://sigaa.sistemas.ufg.br/sigaa/verFoto?idFoto=2168447&key=2e07e5b65ce1ed3e6ba8dae7c4c1d6cd" alt="{{ tag.name }}">
+          {{ tag.name }}
+          <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>
+      
+        <button mat-icon-button (click)="toggleTagInput()">
+          <mat-icon aria-hidden="false" class="add-button">add</mat-icon>
+        </button>
+      
+        <mat-form-field class="form-field" *ngIf="tagInput">
+          <input matInput [(ngModel)]="newTag" placeholder="Digite o nome da etiqueta" (keydown.enter)="addTag(); toggleTagInput()">
+        </mat-form-field>
       </mat-chip-list>
       
+
     </mat-card-content>
 
     <mat-card-actions>
