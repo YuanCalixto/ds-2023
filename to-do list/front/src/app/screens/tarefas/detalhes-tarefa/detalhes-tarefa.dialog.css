@@ -42,6 +42,13 @@
   margin-bottom: 16px;
 }
 
+.add-button {
+  border-radius: 50%;
+  background-color: #009933;
+  color: #fff;
+}
+
+
 @media (max-width: 600px) {
   .dialog-content {
     max-width: 95vw;
