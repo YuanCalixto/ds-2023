@@ -16,6 +16,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/tarefas")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TodoController {
 
     @Autowired
@@ -44,7 +45,7 @@ public class TodoController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> update(@PathVariable(value = "id") UUID id,
-                                         @RequestBody @Valid TodoDto todoDto) {
+                                         @Valid @RequestBody TodoDto todoDto) {
         Optional<TodoModel> todoModelOptional = todoService.findById(id);
         if(todoModelOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Todo not found.");
@@ -53,6 +54,7 @@ public class TodoController {
         BeanUtils.copyProperties(todoDto, todoModel);
         return ResponseEntity.status(HttpStatus.OK).body(todoService.save(todoModel));
     }
+
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Object> delete(@PathVariable(value = "id") UUID id) {
