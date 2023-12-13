@@ -1,5 +1,5 @@
 CREATE TABLE tb_todo (
-    todo_id UUID PRIMARY KEY,
+    id UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description VARCHAR(1000),
     completed BOOLEAN,
