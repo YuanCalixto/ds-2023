@@ -1,15 +1,13 @@
 package br.com.dominiosdesoftware.todo.models;
 
+import br.com.dominiosdesoftware.todo.models.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -42,7 +40,7 @@ public class TodoModel {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserModel user;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "tag_id")
