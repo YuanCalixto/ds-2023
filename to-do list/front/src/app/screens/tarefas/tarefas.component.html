@@ -41,7 +41,7 @@
     <!-- Conteúdo Principal -->
     <mat-sidenav-content>
         <mat-toolbar color="white">
-            <span class="title">Faculdade</span>
+            <span class="title">Pronto App</span>
         </mat-toolbar>
 
         <mat-card>
@@ -50,17 +50,17 @@
                         <mat-list-item *ngFor="let task of tasks" class="list-item">
                             <mat-checkbox [(ngModel)]="task.completed">{{ task.name }}</mat-checkbox>
                             <div class="icon-container">
-                                <button mat-icon-button (click)="editTaskSample(task)">
+                                <button mat-icon-button (click)="editTask(task)">
                                     <mat-icon>edit</mat-icon>
                                 </button>
-                                <button mat-icon-button (click)="removeTaskSample(task)">
+                                <button mat-icon-button (click)="removeTaskSample(task); removeTask(task); ">
                                     <mat-icon>delete</mat-icon>
                                 </button>
                             </div>
                         </mat-list-item>
                     </mat-list>
                     <div class="add-task-button-container">
-                        <button class="adicionar-button" mat-icon-button color="primary" (click)="addTaskSample()">
+                        <button class="adicionar-button" mat-icon-button color="primary" (click)="addTask()">
                             <mat-icon>add</mat-icon>
                         </button>
                     </div>

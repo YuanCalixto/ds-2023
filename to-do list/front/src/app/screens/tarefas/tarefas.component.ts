@@ -30,6 +30,7 @@ export class TarefasComponent implements OnInit {
     this.addUserSamples();
 
     //Funcionais
+    this.loadAllTasks();
     this.loadAllListsByUser();
     this.loadTasksFromFirstList();
   }
