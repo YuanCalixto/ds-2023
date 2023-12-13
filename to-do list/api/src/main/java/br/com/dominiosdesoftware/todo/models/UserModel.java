@@ -23,14 +23,19 @@ public class UserModel {
   @Column(name = "name")
   private String name;
 
+  @Column(name = "username", unique = true)
+  private String username;
+
   @Column(name = "password")
   private String password;
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-  private List<TagUserModel> tags;
+  private List<TodoModel> todos;
 
   @Column(name = "last_updated")
   @UpdateTimestamp
   private Date lastUpdated;
 }
+
+
 
