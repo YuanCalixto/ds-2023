@@ -1,7 +1,9 @@
 package br.com.dominiosdesoftware.todo.controllers;
 
 import br.com.dominiosdesoftware.todo.dtos.AuthenticationDTO;
+import br.com.dominiosdesoftware.todo.dtos.LoginResponseDTO;
 import br.com.dominiosdesoftware.todo.dtos.RegisterDTO;
+import br.com.dominiosdesoftware.todo.infra.security.TokenService;
 import br.com.dominiosdesoftware.todo.models.user.User;
 import br.com.dominiosdesoftware.todo.repositories.UserRepository;
 import jakarta.validation.Valid;
@@ -25,21 +27,26 @@ public class AuthenticationController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping("/login")
-    public ResponseEntity login(@Valid @RequestBody AuthenticationDTO data) {
+    public ResponseEntity login( @RequestBody @Valid AuthenticationDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@Valid @RequestBody RegisterDTO data) {
+    public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
         if (this.userRepository.findByLogin(data.login()) != null) {
             return ResponseEntity.badRequest().build();
         }
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        User newUser = new User(data.login(), encryptedPassword, data.role());
+        User newUser = new User(data.login(), encryptedPassword);
         this.userRepository.save(newUser);
 
         return ResponseEntity.ok().build();
