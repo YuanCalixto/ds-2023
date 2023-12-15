@@ -22,33 +22,23 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
     private UUID id;
 
-    @Column(name = "login", unique = true, nullable = false)
     private String login;
 
-    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "role", nullable = false)
-    private UserRole role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<TodoModel> todos;
 
-    public User(String login, String encryptedPassword, UserRole role) {
+    public User(String login, String encryptedPassword) {
         this.login = login;
         this.password = encryptedPassword;
-        this.role = role;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == UserRole.ADMIN) {
-            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),
-                           new SimpleGrantedAuthority("ROLE_USER"));
-        }
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
