@@ -2,7 +2,6 @@ package br.com.dominiosdesoftware.todo.services;
 
 import br.com.dominiosdesoftware.todo.models.TodoModel;
 import br.com.dominiosdesoftware.todo.repositories.TodoRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

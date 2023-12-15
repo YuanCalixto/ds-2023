@@ -45,7 +45,7 @@ public class TodoController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> update(@PathVariable(value = "id") UUID id,
-                                         @Valid @RequestBody TodoDto todoDto) {
+                                         @RequestBody @Valid TodoDto todoDto) {
         Optional<TodoModel> todoModelOptional = todoService.findById(id);
         if(todoModelOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Todo not found.");
@@ -54,7 +54,6 @@ public class TodoController {
         BeanUtils.copyProperties(todoDto, todoModel);
         return ResponseEntity.status(HttpStatus.OK).body(todoService.save(todoModel));
     }
-
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Object> delete(@PathVariable(value = "id") UUID id) {
