@@ -8,7 +8,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { TasksService } from 'src/app/core/domain/service/tasks.service';
 import { MaterialModule } from 'src/app/core/material/material.module';
-import { TasksDetailsModule } from './detalhes-tarefa/tasks-details.module';
+import { TasksDetailsModule } from './task-details/tasks-details.module';
 import { TasksRoutingModule } from './tasks-routing.module';
 import { TasksComponent } from './tasks.component';
 import { ListsService } from 'src/app/core/domain/service/lists.service';

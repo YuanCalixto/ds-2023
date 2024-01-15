@@ -8,7 +8,7 @@ export interface Task {
   name: string;
   description: string;
   completed: boolean;
-  creator: User;
+  user: User;
   lastUpdated: Date;
   tags: Tag[];
   listId: string;

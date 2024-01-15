@@ -6,7 +6,7 @@ import { Task } from 'src/app/core/domain/entity/task';
 import { User } from 'src/app/core/domain/entity/user';
 import { ListsService } from 'src/app/core/domain/service/lists.service';
 import { TasksService } from 'src/app/core/domain/service/tasks.service';
-import { TasksDetailsDialog } from './detalhes-tarefa/tasks-details.dialog';
+import { TasksDetailsDialog } from './task-details/tasks-details.dialog';
 import { ListDetailsDialog } from './list-details/list-details.dialog';
 
 @Component({
@@ -96,7 +96,7 @@ export class TasksComponent implements OnInit {
     dialogRef.afterClosed().subscribe((task: Task) => {
       if (task) {
         task.listId = this.selectedListId;
-        task.creator = this.usuarioLogado;
+        task.user = this.usuarioLogado;
         task.completed = false;
         this.tasksService.createTasks(task).subscribe(
           (newTask) => {
@@ -174,7 +174,7 @@ export class TasksComponent implements OnInit {
 
   setCompleted(task: Task): void {
     if (task) {
-      task.completed = !task.completed;
+
 
       this.tasksService.updateTasks(task.id, task).subscribe(
         (updatedTask) => {},

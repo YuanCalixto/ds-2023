@@ -35,7 +35,7 @@ export class TasksService extends HandleMessageError {
   }
 
   updateTasks(id: number, tarefa: Task): Observable<Task> {
-    return this.http.post<Task>(`${environment.serverURL}/tarefas/${id}`, tarefa)
+    return this.http.put<Task>(`${environment.serverURL}/tarefas/${id}`, tarefa)
       .pipe(catchError(this.handleError));
   }  
 

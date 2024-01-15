@@ -41,7 +41,7 @@ public class TaskController {
     Task task = new Task();
     task.setName(taskInput.name());
     task.setDescription(taskInput.description());
-    task.setUser(taskInput.creator());
+    task.setUser(taskInput.user());
     task.setList(list);
 
     Task savedTask = taskService.save(task);
@@ -75,15 +75,16 @@ public class TaskController {
   }
 
 
-  @PostMapping("/{id}")
+  @PutMapping("/{id}")
   public ResponseEntity<TaskOutput> update(@PathVariable UUID id, @RequestBody TaskInput taskInput) {
     Task task = taskService.findById(id);
 
     task.setName(taskInput.name());
     task.setDescription(taskInput.description());
     task.setCompleted(taskInput.completed());
-
     Task updatedTodo = taskService.save(task);
+
+
     TaskOutput taskOutput = new TaskOutput(updatedTodo);
 
     return ResponseEntity.status(HttpStatus.OK).body(taskOutput);
