@@ -27,15 +27,23 @@ export class RegisterComponent implements OnInit {
   }
 
   registerSample() {
-    this.authService.registerSample(this.loginData).subscribe(
-      (response) => {
-        localStorage.setItem('usuarioLogado', JSON.stringify(response));
-        this.router.navigate(['/tasks']);
-      },
-      (error) => {
-        this.authService.showMessage('Usuário ou senha incorretos.');
-      }
-    );
+    if (!this.loginData.login || !this.loginData.password) {
+      this.authService.showMessage('Usuário e senha são obrigatórios.');
+    } else if (this.loginData.login.trim().length < 1) {
+      this.authService.showMessage('Usuário não pode ser vazio.');
+    } else if (this.loginData.password.trim().length < 8) {
+      this.authService.showMessage('A senha deve ter pelo menos 8 caracteres válidos.');
+    } else {
+      this.authService.registerSample(this.loginData).subscribe(
+        (response) => {
+          localStorage.setItem('usuarioLogado', JSON.stringify(response));
+          this.router.navigate(['/tasks']);
+        },
+        (error) => {
+          this.authService.showMessage('Erro ao registrar usuário.');
+        }
+      );
+    }
   }
 
   toggleDarkMode() {
