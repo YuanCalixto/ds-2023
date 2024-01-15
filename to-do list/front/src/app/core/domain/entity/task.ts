@@ -1,8 +1,7 @@
-import { Tag } from './tag';
 import { User } from './user';
 
 export interface Task {
-  id: number;
+  id: string;
   dateCreated: Date;
 
   name: string;
@@ -10,6 +9,5 @@ export interface Task {
   completed: boolean;
   user: User;
   lastUpdated: Date;
-  tags: Tag[];
   listId: string;
 }

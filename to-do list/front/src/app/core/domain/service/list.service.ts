@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ListsService extends HandleMessageError {
+export class ListService extends HandleMessageError {
 
   constructor(
     private http: HttpClient,
@@ -23,7 +23,7 @@ export class ListsService extends HandleMessageError {
       .pipe(catchError(this.handleError));
   }
 
-  getAllListsByUser(userId: number): Observable<List[]> {
+  getAllListsByUser(userId: string): Observable<List[]> {
     return this.http.post<List[]>(`${environment.serverURL}/lists/user/${userId}`, null)
       .pipe(catchError(this.handleError));
   }

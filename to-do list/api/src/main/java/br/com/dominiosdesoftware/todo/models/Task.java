@@ -54,8 +54,4 @@ public class Task {
   @JoinColumn(name = "user_id")
   @JsonIgnore
   private User user;
-
-  @ManyToOne
-  @JoinColumn(name = "tag_id")
-  private Tag tag;
 }

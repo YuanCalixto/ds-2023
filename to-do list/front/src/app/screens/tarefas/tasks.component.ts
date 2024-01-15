@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { List } from 'src/app/core/domain/entity/list';
 import { Task } from 'src/app/core/domain/entity/task';
 import { User } from 'src/app/core/domain/entity/user';
-import { ListsService } from 'src/app/core/domain/service/lists.service';
-import { TasksService } from 'src/app/core/domain/service/tasks.service';
+import { ListService } from 'src/app/core/domain/service/list.service';
+import { TaskService } from 'src/app/core/domain/service/task.service';
 import { TasksDetailsDialog } from './task-details/tasks-details.dialog';
 import { ListDetailsDialog } from './list-details/list-details.dialog';
 
@@ -25,8 +25,8 @@ export class TasksComponent implements OnInit {
 
   constructor(
     private cdRef: ChangeDetectorRef,
-    private listsService: ListsService,
-    private tasksService: TasksService,
+    private listsService: ListService,
+    private tasksService: TaskService,
     private dialog: MatDialog,
     private router: Router
   ) {}
@@ -174,8 +174,6 @@ export class TasksComponent implements OnInit {
 
   setCompleted(task: Task): void {
     if (task) {
-
-
       this.tasksService.updateTasks(task.id, task).subscribe(
         (updatedTask) => {},
         (error) => console.error('Erro ao editar tarefa:', error),

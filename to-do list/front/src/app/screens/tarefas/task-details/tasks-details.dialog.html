@@ -18,29 +18,30 @@
 
       <p *ngIf="task.dateCreated">Criado em: {{ task.dateCreated | date: 'dd/MM/yyyy - HH:mm' }}</p>
       <p *ngIf="task.user">Criador: {{ task.user.login }}</p>
+      
+      <p *ngIf="task.id">Etiquetas:</p>
 
-      <p *ngIf="task.tags && task.tags.length > 0">Etiquetas:</p>
-      <mat-chip-list *ngIf="task.tags && task.tags.length > 0">
-        <mat-chip *ngFor="let tag of task.tags" [removable]="true" (removed)="removeTag(tag)">
-          <img matChipAvatar src="https://sigaa.sistemas.ufg.br/sigaa/verFoto?idFoto=2168447&key=2e07e5b65ce1ed3e6ba8dae7c4c1d6cd" alt="{{ tag.name }}">
+      <mat-chip-list *ngIf="task.id && tags && tags.length > 0">
+        <mat-chip *ngFor="let tag of tags" [removable]="true" (removed)="removeTag(tag)">
+          <img matChipAvatar src="assets/images/Todo.png" alt="{{ tag.name }}">
           {{ tag.name }}
           <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>
-      
-        <button mat-icon-button (click)="toggleTagInput()">
-          <mat-icon aria-hidden="false" class="add-button">add</mat-icon>
-        </button>
-      
-        <mat-form-field class="form-field" *ngIf="tagInput">
-          <input matInput [(ngModel)]="newTag" placeholder="Digite o nome da etiqueta" (keydown.enter)="addTag(); toggleTagInput()">
-        </mat-form-field>
       </mat-chip-list>
       
-
+      <button mat-icon-button *ngIf="task.id" (click)="toggleTagInput()">
+        <mat-icon aria-hidden="false" class="add-button">add</mat-icon>
+      </button>
+      
+      <mat-form-field class="form-field" *ngIf="task.id && tagInput">
+        <input matInput [(ngModel)]="newTag" placeholder="Digite o nome da etiqueta" (keydown.enter)="addTag()">
+      </mat-form-field>
+      
+      
     </mat-card-content>
 
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="saveTask()" class="button" [disabled]="!task.name && !task.description">Salvar</button>
+      <button mat-raised-button color="primary" (click)="saveTask()" class="button" [disabled]="!task.name || !task.description">Salvar</button>
     </mat-card-actions>
   </mat-card>
 </mat-card-container>

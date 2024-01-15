@@ -6,8 +6,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { TasksDetailsDialog } from './tasks-details.dialog';
+import { TagService } from 'src/app/core/domain/service/tag.service';
 import { MaterialModule } from 'src/app/core/material/material.module';
+import { TasksDetailsDialog } from './tasks-details.dialog';
 
 @NgModule({
   declarations: [TasksDetailsDialog],
@@ -21,6 +22,7 @@ import { MaterialModule } from 'src/app/core/material/material.module';
     MatDividerModule,
     MatIconModule,
   ],
+  providers: [TagService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class TasksDetailsModule {}

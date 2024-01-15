@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class TasksService extends HandleMessageError {
+export class TaskService extends HandleMessageError {
 
   constructor(
     private http: HttpClient,
@@ -34,12 +34,12 @@ export class TasksService extends HandleMessageError {
       .pipe(catchError(this.handleError));
   }
 
-  updateTasks(id: number, tarefa: Task): Observable<Task> {
+  updateTasks(id: string, tarefa: Task): Observable<Task> {
     return this.http.put<Task>(`${environment.serverURL}/tarefas/${id}`, tarefa)
       .pipe(catchError(this.handleError));
   }  
 
-  deleteTasks(id: number): Observable<any> {
+  deleteTasks(id: string): Observable<any> {
     return this.http.delete(`${environment.serverURL}/tarefas/${id}`)
       .pipe(catchError(this.handleError));
   }
