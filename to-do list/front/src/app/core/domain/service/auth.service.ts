@@ -34,4 +34,11 @@ export class AuthService extends HandleMessageError {
       .post<any>(`${environment.serverURL}/auth/register`, registerData)
       .pipe(catchError(this.handleError));
   }
+
+  
+  registerSample(registerData: { login: string; password: string }): Observable<any> {
+    return this.http
+      .post<any>(`${environment.serverURL}/users/register`, registerData)
+      .pipe(catchError(this.handleError));
+  }
 }

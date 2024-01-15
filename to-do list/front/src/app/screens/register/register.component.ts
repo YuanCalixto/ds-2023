@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/domain/service/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   loginData: { login: string; password: string } = { login: '', password: '' };
   darkMode: boolean = false;
 
@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login() {
-    this.authService.login(this.loginData).subscribe(
+  registerSample() {
+    this.authService.registerSample(this.loginData).subscribe(
       (response) => {
         localStorage.setItem('usuarioLogado', JSON.stringify(response));
         this.router.navigate(['/tasks']);
@@ -36,22 +36,6 @@ export class LoginComponent implements OnInit {
         this.authService.showMessage('Usuário ou senha incorretos.');
       }
     );
-  }
-
-  loginSample() {
-    this.authService.loginSample(this.loginData).subscribe(
-      (response) => {
-        localStorage.setItem('usuarioLogado', JSON.stringify(response));
-        this.router.navigate(['/tasks']);
-      },
-      (error) => {
-        this.authService.showMessage('Usuário ou senha incorretos.');
-      }
-    );
-  }
-
-  directRegister() {
-    this.router.navigate(['/register']);
   }
 
   toggleDarkMode() {

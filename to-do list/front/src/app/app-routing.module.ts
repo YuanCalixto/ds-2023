@@ -10,6 +10,10 @@ const routes: Routes = [
     path: 'tasks',
     loadChildren: () => import('./screens/tarefas/tasks.module').then(mod => mod.TasksModule)
   },
+  {
+    path: 'register',
+    loadChildren: () => import('./screens/register/register.module').then(mod => mod.RegisterModule)
+  },
 ];
 
 @NgModule({

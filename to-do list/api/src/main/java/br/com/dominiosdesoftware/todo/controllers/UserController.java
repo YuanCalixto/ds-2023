@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +42,20 @@ public class UserController {
     }
 
     return ResponseEntity.status(HttpStatus.OK).body(new UserOutput(user));
+  }
+
+  @PostMapping("/register")
+  public ResponseEntity<UserOutput> registerUser(@RequestBody UserInput userInput) {
+
+    var user = new User(userInput.login(), userInput.password());
+
+    if (user == null) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    var userSaved = userService.save(user);
+
+    return ResponseEntity.status(HttpStatus.OK).body(new UserOutput(userSaved));
   }
 
 }

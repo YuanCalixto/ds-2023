@@ -14,8 +14,8 @@
       <img src="assets/images/Todo.png" width="119" alt="Logo" class="logo-img" />
       <h1 class="login-title">Pronto</h1>
     </div>
-    <h2 class="login-subtitle">Entre com a sua conta</h2>
-    <form (submit)="loginSample()" method="post">
+    <h2 class="login-subtitle">Criar conta</h2>
+    <form (submit)="registerSample()" method="post">
       <br>
       <div class="form-group">
         <input type="text" [(ngModel)]="loginData.login" class="login-input" id="login" name="login" placeholder="E-Mail">
@@ -23,10 +23,9 @@
       <br>
       <div class="form-group">
         <input type="password" [(ngModel)]="loginData.password" class="login-input" id="senha" name="senha" placeholder="Senha">
-        <span style="margin-left: 9%; font-size: smaller; cursor: pointer; color: #131313;" (click)="directRegister()">Não possui conta?</span>
       </div>
       <br>
-      <button type="submit" class="login-button">Login</button>
+      <button type="submit" class="login-button">Criar</button>
     </form>
   </div>
 </div>
@@ -38,8 +37,8 @@
       
       <h1 class="login-title-dark">Pronto</h1>
     </div>
-    <h2 class="login-subtitle-dark">Entre com a sua conta</h2>
-    <form (submit)="loginSample()" method="post">
+    <h2 class="login-subtitle-dark">Criar conta</h2>
+    <form (submit)="registerSample()" method="post">
       <br>
       <div class="form-group">
         <input type="text" [(ngModel)]="loginData.login" class="login-input-dark" id="login" name="login" placeholder="E-Mail">
@@ -47,11 +46,9 @@
       <br>
       <div class="form-group">
         <input type="password" [(ngModel)]="loginData.password" class="login-input-dark" id="senha" name="senha" placeholder="Senha">
-        <span style="margin-left: 9%; font-size: smaller; cursor: pointer; color: #ffffff;" (click)="directRegister()">Não possui conta?</span>
-
       </div>
       <br>
-      <button type="submit"  class="login-button">Login</button>
+      <button type="submit"  class="login-button">Criar</button>
     </form>
   </div>
 </div>
