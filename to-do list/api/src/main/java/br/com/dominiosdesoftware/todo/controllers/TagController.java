@@ -53,21 +53,21 @@ public class TagController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<TagOutput> findById(@PathVariable UUID id) {
+  public ResponseEntity<TagOutput> findById(@PathVariable Integer id) {
     Tag tag = tagService.findById(id);
     TagOutput tagOutput = new TagOutput(tag);
     return ResponseEntity.status(HttpStatus.OK).body(tagOutput);
   }
 
   @GetMapping("/task/{taskId}")
-  public ResponseEntity<List<TagOutput>> findByTaskId(@PathVariable UUID taskId) {
+  public ResponseEntity<List<TagOutput>> findByTaskId(@PathVariable Integer taskId) {
     List<Tag> tags = tagService.findByTaskId(taskId);
     List<TagOutput> tagOutputs = tags.stream().map(TagOutput::new).toList();
     return ResponseEntity.status(HttpStatus.OK).body(tagOutputs);
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<TagOutput> delete(@PathVariable UUID id) {
+  public ResponseEntity<TagOutput> delete(@PathVariable Integer id) {
     Tag tag = tagService.findById(id);
     tagService.delete(tag);
     TagOutput tagOutput = new TagOutput(tag);

@@ -19,7 +19,7 @@ public class Tag {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id")
-  private UUID id;
+  private Integer id;
 
   @Column(name = "name")
   private String name;

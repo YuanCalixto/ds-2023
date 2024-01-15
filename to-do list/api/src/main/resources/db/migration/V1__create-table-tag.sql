@@ -1,4 +1,4 @@
 CREATE TABLE tb_tag (
-    id UUID PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );

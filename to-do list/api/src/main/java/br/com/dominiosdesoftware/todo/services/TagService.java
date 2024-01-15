@@ -21,11 +21,11 @@ public class TagService {
     return tagRepository.findAll();
   }
 
-  public Tag findById(UUID id) {
+  public Tag findById(Integer id) {
     return tagRepository.findById(id).orElse(null);
   }
 
-  public List<Tag> findByTaskId(UUID taskId) {
+  public List<Tag> findByTaskId(Integer taskId) {
     return tagRepository.findByTaskId(taskId);
   }
 

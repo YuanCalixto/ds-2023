@@ -21,7 +21,7 @@ public class ListService {
     return listRepository.findAll();
   }
 
-  public List findById(UUID id) {
+  public List findById(Integer id) {
     Optional<List> optionalListModel = listRepository.findById(id);
     return optionalListModel.orElse(null);
   }

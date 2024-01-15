@@ -21,11 +21,11 @@ public class TaskService {
     return taskRepository.findAll();
   }
 
-  public Task findById(UUID id) {
+  public Task findById(Integer id) {
     return taskRepository.findById(id).orElse(null);
   }
 
-  public List<Task> findByListId(UUID listId) {
+  public List<Task> findByListId(Integer listId) {
     return taskRepository.findByListId(listId);
   }
 

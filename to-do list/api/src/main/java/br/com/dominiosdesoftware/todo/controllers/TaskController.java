@@ -58,14 +58,14 @@ public class TaskController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<TaskOutput> findById(@PathVariable UUID id) {
+  public ResponseEntity<TaskOutput> findById(@PathVariable Integer id) {
     Task task = taskService.findById(id);
     TaskOutput taskOutput = new TaskOutput(task);
     return ResponseEntity.status(HttpStatus.OK).body(taskOutput);
   }
 
   @GetMapping("/list/{listId}")
-  public ResponseEntity<java.util.List<TaskOutput>> findByListId(@PathVariable UUID listId) {
+  public ResponseEntity<java.util.List<TaskOutput>> findByListId(@PathVariable Integer listId) {
 
     java.util.List<Task> tasks = taskService.findByListId(listId);
 
@@ -76,7 +76,7 @@ public class TaskController {
 
 
   @PutMapping("/{id}")
-  public ResponseEntity<TaskOutput> update(@PathVariable UUID id, @RequestBody TaskInput taskInput) {
+  public ResponseEntity<TaskOutput> update(@PathVariable Integer id, @RequestBody TaskInput taskInput) {
     Task task = taskService.findById(id);
 
     task.setName(taskInput.name());
@@ -91,7 +91,7 @@ public class TaskController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<TaskOutput> delete(@PathVariable UUID id) {
+  public ResponseEntity<TaskOutput> delete(@PathVariable Integer id) {
     Task task = taskService.findById(id);
     taskService.delete(task);
     TaskOutput taskOutput = new TaskOutput(task);

@@ -50,7 +50,7 @@ public class ListController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<ListOutput> findById(@PathVariable UUID id) {
+  public ResponseEntity<ListOutput> findById(@PathVariable Integer id) {
     List list = listService.findById(id);
     return ResponseEntity.status(HttpStatus.OK).body(new ListOutput(list));
   }
@@ -63,7 +63,7 @@ public class ListController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<ListOutput> update(@PathVariable UUID id, @RequestBody ListInput listInput) {
+  public ResponseEntity<ListOutput> update(@PathVariable Integer id, @RequestBody ListInput listInput) {
     List list = listService.findById(id);
     list.setName(listInput.name());
 
@@ -74,7 +74,7 @@ public class ListController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<ListOutput> delete(@PathVariable UUID id) {
+  public ResponseEntity<ListOutput> delete(@PathVariable Integer id) {
     List list = listService.findById(id);
     listService.delete(list);
     return ResponseEntity.status(HttpStatus.OK).body(new ListOutput(list));

@@ -4,7 +4,7 @@ import br.com.dominiosdesoftware.todo.models.Task;
 import java.util.Date;
 import java.util.UUID;
 
-public record TaskOutput(UUID id, Date dateCreated, String name, String description, Boolean completed,
+public record TaskOutput(Integer id, Date dateCreated, String name, String description, Boolean completed,
                          UserOutput user) {
 
   public TaskOutput(Task task) {

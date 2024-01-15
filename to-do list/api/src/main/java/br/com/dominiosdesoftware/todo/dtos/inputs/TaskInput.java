@@ -6,6 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 public record TaskInput(@NotBlank String name, @NotBlank String description, @NotNull Boolean completed, User user,
-                        @NotBlank UUID listId) {
+                        @NotBlank Integer listId) {
 
 }
