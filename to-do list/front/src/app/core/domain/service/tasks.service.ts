@@ -3,7 +3,7 @@ import { HandleMessageError } from '../../util/handle-message-error';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, catchError } from 'rxjs';
-import { Tasks } from '../entity/tasks';
+import { Task } from '../entity/task';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -18,34 +18,34 @@ export class TasksService extends HandleMessageError {
     super(snackBar);
   }
 
-  getAllTasks(): Observable<Tasks[]> {
-    return this.http.get<Tasks[]>(`${environment.serverURL}/tarefas`)
-      .pipe(catchError(this.capturarErro));
+  getAllTasks(): Observable<Task[]> {
+    return this.http.get<Task[]>(`${environment.serverURL}/tarefas`)
+      .pipe(catchError(this.handleError));
   }
 
-  getTasksById(id: number): Observable<Tasks> {
-    return this.http.get<Tasks>(`${environment.serverURL}/tarefas/${id}`)
-      .pipe(catchError(this.capturarErro));
+  getTasksById(id: number): Observable<Task> {
+    return this.http.get<Task>(`${environment.serverURL}/tarefas/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
-  createTasks(tarefa: Tasks): Observable<Tasks> {
-    console.log(tarefa)
-    return this.http.post<Tasks>(`${environment.serverURL}/tarefas`, tarefa)
-      .pipe(catchError(this.capturarErro));
+  createTasks(task: any): Observable<Task> {
+    console.log(task)
+    return this.http.post<Task>(`${environment.serverURL}/tarefas`, task)
+      .pipe(catchError(this.handleError));
   }
 
-  updateTasks(id: number, tarefa: Tasks): Observable<Tasks> {
-    return this.http.put<Tasks>(`${environment.serverURL}/tarefas/${id}`, tarefa)
-      .pipe(catchError(this.capturarErro));
-  }
+  updateTasks(id: number, tarefa: Task): Observable<Task> {
+    return this.http.put<Task>(`${environment.serverURL}/tarefas/${id}`, tarefa)
+      .pipe(catchError(this.handleError));
+  }  
 
   deleteTasks(id: number): Observable<any> {
     return this.http.delete(`${environment.serverURL}/tarefas/${id}`)
-      .pipe(catchError(this.capturarErro));
+      .pipe(catchError(this.handleError));
   }
 
-  getTasksByListId(listId: number): Observable<Tasks[]> {
-    return this.http.get<Tasks[]>(`${environment.serverURL}/tarefas?listId=${listId}`)
-      .pipe(catchError(this.capturarErro));
+  getTasksByListId(listId: any): Observable<Task[]> {
+    return this.http.get<Task[]>(`${environment.serverURL}/tarefas?listId=${listId}`)
+      .pipe(catchError(this.handleError));
   }
 }

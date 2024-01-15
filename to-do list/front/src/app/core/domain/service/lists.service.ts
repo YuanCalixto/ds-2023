@@ -3,7 +3,7 @@ import { HandleMessageError } from '../../util/handle-message-error';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, catchError } from 'rxjs';
-import { Lists } from '../entity/lists';
+import { List } from '../entity/list';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -18,33 +18,33 @@ export class ListsService extends HandleMessageError {
     super(snackBar);
   }
 
-  getAllLists(): Observable<Lists[]> {
-    return this.http.get<Lists[]>(`${environment.serverURL}/lists`)
-      .pipe(catchError(this.capturarErro));
+  getAllLists(): Observable<List[]> {
+    return this.http.get<List[]>(`${environment.serverURL}/lists`)
+      .pipe(catchError(this.handleError));
   }
 
-  getAllListsByUser(userId: number): Observable<Lists[]> {
-    return this.http.get<Lists[]>(`${environment.serverURL}/lists?userId=${userId}`)
-      .pipe(catchError(this.capturarErro));
+  getAllListsByUser(userId: number): Observable<List[]> {
+    return this.http.get<List[]>(`${environment.serverURL}/lists/user/${userId}`)
+      .pipe(catchError(this.handleError));
   }
 
-  getListById(id: number): Observable<Lists> {
-    return this.http.get<Lists>(`${environment.serverURL}/lists/${id}`)
-      .pipe(catchError(this.capturarErro));
+  getListById(id: number): Observable<List> {
+    return this.http.get<List>(`${environment.serverURL}/lists/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
-  createList(list: Lists): Observable<Lists> {
-    return this.http.post<Lists>(`${environment.serverURL}/lists`, list)
-      .pipe(catchError(this.capturarErro));
+  createList(list: any): Observable<List> {
+    return this.http.post<List>(`${environment.serverURL}/lists`, list)
+      .pipe(catchError(this.handleError));
   }
 
-  updateList(id: number, list: Lists): Observable<Lists> {
-    return this.http.put<Lists>(`${environment.serverURL}/lists/${id}`, list)
-      .pipe(catchError(this.capturarErro));
+  updateList(id: number, list: List): Observable<List> {
+    return this.http.put<List>(`${environment.serverURL}/lists/${id}`, list)
+      .pipe(catchError(this.handleError));
   }
 
   deleteList(id: number): Observable<any> {
     return this.http.delete(`${environment.serverURL}/lists/${id}`)
-      .pipe(catchError(this.capturarErro));
+      .pipe(catchError(this.handleError));
   }
 }

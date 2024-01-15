@@ -7,7 +7,7 @@ export abstract class HandleMessageError {
   protected constructor(public snackBar: MatSnackBar) {
   }
 
-  public capturarErro(errorResponse: HttpErrorResponse): Observable<never> {
+  public handleError(errorResponse: HttpErrorResponse): Observable<never> {
     let objError;
     if (errorResponse.statusText === 'Unknown Error') {
       return throwError('Servidor indisponível!');

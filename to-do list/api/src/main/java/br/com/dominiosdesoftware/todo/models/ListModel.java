@@ -17,10 +17,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "tb_todo")
+@Table(name = "tb_list")
 @Getter
 @Setter
-public class TodoModel {
+public class ListModel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,12 +29,6 @@ public class TodoModel {
 
   @Column(name = "name")
   private String name;
-
-  @Column(name = "description")
-  private String description;
-
-  @Column(name = "completed")
-  private boolean completed;
 
   @Column(name = "date_created", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
   @CreationTimestamp
@@ -45,14 +39,6 @@ public class TodoModel {
   private Date lastUpdated;
 
   @ManyToOne
-  @JoinColumn(name = "list")
-  private ListModel list;
-
-  @ManyToOne
   @JoinColumn(name = "user_id")
   private User user;
-
-  @ManyToOne
-  @JoinColumn(name = "tag_id")
-  private TagModel tag;
 }

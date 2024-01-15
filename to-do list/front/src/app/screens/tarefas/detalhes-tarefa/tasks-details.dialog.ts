@@ -1,23 +1,22 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Tasks } from 'src/app/core/domain/entity/tasks';
+import { Task } from 'src/app/core/domain/entity/task';
 
 @Component({
-  selector: 'detalhes-tarefa-app',
-  templateUrl: './detalhes-tarefa.dialog.html',
-  styleUrls: ['./detalhes-tarefa.dialog.css'],
+  selector: 'tasks-details-app',
+  templateUrl: './tasks-details.dialog.html',
+  styleUrls: ['./tasks-details.dialog.css'],
 })
-export class DetalhesTarefaDialog implements OnInit {
-  task: Tasks;
+export class TasksDetailsDialog implements OnInit {
+  task: Task;
 
   newTag: string = '';
 
   tagInput = false;
 
-
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { task: Tasks },
-    private dialogRef: MatDialogRef<DetalhesTarefaDialog>
+    @Inject(MAT_DIALOG_DATA) public data: { task: Task },
+    private dialogRef: MatDialogRef<TasksDetailsDialog>
   ) {
     this.task = { ...data.task };
   }

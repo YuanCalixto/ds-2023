@@ -6,11 +6,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { DetalhesTarefaDialog } from './detalhes-tarefa.dialog';
+import { TasksDetailsDialog } from './tasks-details.dialog';
 import { MaterialModule } from 'src/app/core/material/material.module';
 
 @NgModule({
-  declarations: [DetalhesTarefaDialog],
+  declarations: [TasksDetailsDialog],
   imports: [
     CommonModule,
     MaterialModule,
@@ -23,4 +23,4 @@ import { MaterialModule } from 'src/app/core/material/material.module';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class DetalhesTarefaModule {}
+export class TasksDetailsModule {}

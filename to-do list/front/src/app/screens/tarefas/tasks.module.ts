@@ -8,25 +8,27 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { TasksService } from 'src/app/core/domain/service/tasks.service';
 import { MaterialModule } from 'src/app/core/material/material.module';
-import { DetalhesTarefaModule } from './detalhes-tarefa/detalhes-tarefa.module';
-import { TarefasRoutingModule } from './tarefas-routing.module';
-import { TarefasComponent } from './tarefas.component';
+import { TasksDetailsModule } from './detalhes-tarefa/tasks-details.module';
+import { TasksRoutingModule } from './tasks-routing.module';
+import { TasksComponent } from './tasks.component';
 import { ListsService } from 'src/app/core/domain/service/lists.service';
+import { ListDetailsModule } from './list-details/list-details.module';
 
 @NgModule({
-  declarations: [TarefasComponent],
+  declarations: [TasksComponent],
   imports: [
     CommonModule,
     MaterialModule,
     MatCheckboxModule,
     HttpClientModule,
     FormsModule,
-    DetalhesTarefaModule,
-    TarefasRoutingModule,
+    TasksDetailsModule,
+    ListDetailsModule,
+    TasksRoutingModule,
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
   ],
   providers: [ListsService, TasksService],
 })
-export class TarefasModule {}
+export class TasksModule {}
