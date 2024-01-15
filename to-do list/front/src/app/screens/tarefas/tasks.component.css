@@ -96,6 +96,15 @@
     align-content: center;
 }
 
+.mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.spacer {
+    flex: 1;
+}
+
 @media only screen and (max-width: 768px) {
     .container {
         width: 100%;

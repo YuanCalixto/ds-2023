@@ -17,7 +17,7 @@
       </mat-form-field>
 
       <p *ngIf="task.dateCreated">Criado em: {{ task.dateCreated | date: 'dd/MM/yyyy - HH:mm' }}</p>
-      <p *ngIf="task.creator">Criador: {{ task.creator.name }}</p>
+      <p *ngIf="task.creator">Criador: {{ task.creator.login }}</p>
 
       <p *ngIf="task.tags && task.tags.length > 0">Etiquetas:</p>
       <mat-chip-list *ngIf="task.tags && task.tags.length > 0">

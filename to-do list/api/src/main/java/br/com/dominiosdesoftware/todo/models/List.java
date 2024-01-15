@@ -1,6 +1,7 @@
 package br.com.dominiosdesoftware.todo.models;
 
 import br.com.dominiosdesoftware.todo.models.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name = "tb_list")
 @Getter
 @Setter
-public class ListModel {
+public class List {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,5 +41,7 @@ public class ListModel {
 
   @ManyToOne
   @JoinColumn(name = "user_id")
+  @JsonIgnore
+
   private User user;
 }

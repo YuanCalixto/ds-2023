@@ -1,6 +1,7 @@
 package br.com.dominiosdesoftware.todo.models;
 
 import br.com.dominiosdesoftware.todo.models.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name = "tb_todo")
 @Getter
 @Setter
-public class TodoModel {
+public class Task {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,14 +46,16 @@ public class TodoModel {
   private Date lastUpdated;
 
   @ManyToOne
-  @JoinColumn(name = "list")
-  private ListModel list;
+  @JoinColumn(name = "list_id")
+  @JsonIgnore
+  private List list;
 
   @ManyToOne
   @JoinColumn(name = "user_id")
+  @JsonIgnore
   private User user;
 
   @ManyToOne
   @JoinColumn(name = "tag_id")
-  private TagModel tag;
+  private Tag tag;
 }

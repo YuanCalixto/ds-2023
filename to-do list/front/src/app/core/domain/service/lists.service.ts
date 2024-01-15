@@ -24,7 +24,7 @@ export class ListsService extends HandleMessageError {
   }
 
   getAllListsByUser(userId: number): Observable<List[]> {
-    return this.http.get<List[]>(`${environment.serverURL}/lists/user/${userId}`)
+    return this.http.post<List[]>(`${environment.serverURL}/lists/user/${userId}`, null)
       .pipe(catchError(this.handleError));
   }
 

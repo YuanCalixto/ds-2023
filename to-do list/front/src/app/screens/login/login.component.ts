@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/core/domain/entity/user';
 import { AuthService } from 'src/app/core/domain/service/auth.service';
 
 @Component({
@@ -15,9 +16,20 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     const darkModeValue = localStorage.getItem('darkmode');
-
     this.darkMode = darkModeValue === 'true';
+
+
+
   }
+
+  ngAfterViewInit() {
+    const usuarioLogado = localStorage.getItem('usuarioLogado');
+  
+    if (usuarioLogado !== null) {
+      this.router.navigate(['/tasks']);
+    }
+  }
+  
 
   login() {
     this.authService.login(this.loginData).subscribe(
@@ -25,7 +37,9 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('usuarioLogado', JSON.stringify(response));
         this.router.navigate(['/tasks']);
       },
-      (error) => {}
+      (error) => {
+        this.authService.showMessage("Usuário ou senha incorretos.")
+      }
     );
   }
 
@@ -35,7 +49,9 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('usuarioLogado', JSON.stringify(response));
         this.router.navigate(['/tasks']);
       },
-      (error) => {}
+      (error) => {
+        this.authService.showMessage("Usuário ou senha incorretos.")
+      }
     );
   }
 

@@ -6,6 +6,6 @@ import java.util.UUID;
 public record UserOutput(UUID id, String login) {
 
   public UserOutput(User user) {
-    this(user.getId(), user.getLogin());
+    this(user.getId(),  user.getLogin());
   }
 }

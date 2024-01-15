@@ -2,9 +2,8 @@ package br.com.dominiosdesoftware.todo.controllers;
 
 import br.com.dominiosdesoftware.todo.dtos.inputs.ListInput;
 import br.com.dominiosdesoftware.todo.dtos.outputs.ListOutput;
-import br.com.dominiosdesoftware.todo.models.ListModel;
+import br.com.dominiosdesoftware.todo.models.List;
 import br.com.dominiosdesoftware.todo.services.ListService;
-import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,42 +32,42 @@ public class ListController {
 
   @PostMapping
   public ResponseEntity<ListOutput> save(@RequestBody ListInput listInput) {
-    ListModel listModel = new ListModel();
-    listModel.setName(listInput.name());
-    listModel.setUser(listInput.user());
+    List list = new List();
+    list.setName(listInput.name());
+    list.setUser(listInput.user());
 
-    ListModel savedList = listService.save(listModel);
+    List savedList = listService.save(list);
     ListOutput listOutput = new ListOutput(savedList);
 
     return ResponseEntity.status(HttpStatus.CREATED).body(listOutput);
   }
 
   @GetMapping
-  public ResponseEntity<List<ListOutput>> findAll() {
-    List<ListModel> allLists = listService.findAll();
-    List<ListOutput> listsOutput = allLists.stream().map(ListOutput::new).toList();
+  public ResponseEntity<java.util.List<ListOutput>> findAll() {
+    java.util.List<List> allLists = listService.findAll();
+    java.util.List<ListOutput> listsOutput = allLists.stream().map(ListOutput::new).toList();
     return ResponseEntity.status(HttpStatus.OK).body(listsOutput);
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<ListOutput> findById(@PathVariable UUID id) {
-    ListModel listModel = listService.findById(id);
-    return ResponseEntity.status(HttpStatus.OK).body(new ListOutput(listModel));
+    List list = listService.findById(id);
+    return ResponseEntity.status(HttpStatus.OK).body(new ListOutput(list));
   }
 
-  @GetMapping("/user/{userId}")
-  public ResponseEntity<List<ListOutput>> getAllListsByUser(@PathVariable UUID userId) {
-    List<ListModel> lists = listService.findAllListsByUser(userId);
-    List<ListOutput> listsOutput = lists.stream().map(ListOutput::new).toList();
-    return ResponseEntity.status(HttpStatus.OK).body(listsOutput);
+  @PostMapping("/user/{userId}")
+  public java.util.List<ListOutput> getAllListsByUser(@PathVariable UUID userId) {
+    java.util.List<List> lists = listService.findAllListsByUser(userId);
+    java.util.List<ListOutput> listsOutput = lists.stream().map(ListOutput::new).toList();
+    return (listsOutput);
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<ListOutput> update(@PathVariable UUID id, @RequestBody ListInput listInput) {
-    ListModel listModel = listService.findById(id);
-    listModel.setName(listInput.name());
+    List list = listService.findById(id);
+    list.setName(listInput.name());
 
-    ListModel updatedList = listService.save(listModel);
+    List updatedList = listService.save(list);
     ListOutput listOutput = new ListOutput(updatedList);
 
     return ResponseEntity.status(HttpStatus.OK).body(listOutput);
@@ -76,9 +75,9 @@ public class ListController {
 
   @DeleteMapping("/{id}")
   public ResponseEntity<ListOutput> delete(@PathVariable UUID id) {
-    ListModel listModel = listService.findById(id);
-    listService.delete(listModel);
-    return ResponseEntity.status(HttpStatus.OK).body(new ListOutput(listModel));
+    List list = listService.findById(id);
+    listService.delete(list);
+    return ResponseEntity.status(HttpStatus.OK).body(new ListOutput(list));
   }
 }
 

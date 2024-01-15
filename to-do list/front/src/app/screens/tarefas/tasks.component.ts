@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { List } from 'src/app/core/domain/entity/list';
 import { Task } from 'src/app/core/domain/entity/task';
 import { User } from 'src/app/core/domain/entity/user';
@@ -26,7 +27,8 @@ export class TasksComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     private listsService: ListsService,
     private tasksService: TasksService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -35,16 +37,15 @@ export class TasksComponent implements OnInit {
       ? JSON.parse(usuarioLogadoString)
       : null;
 
-      const darkModeValue = localStorage.getItem('darkmode');
+    const darkModeValue = localStorage.getItem('darkmode');
 
-      this.darkMode = darkModeValue === 'true';
-  
+    this.darkMode = darkModeValue === 'true';
 
     this.loadAllListsByUser();
     this.loadTasksFromFirstList();
   }
 
-  private loadAllListsByUser(): void {
+  loadAllListsByUser(): void {
     this.listsService.getAllListsByUser(this.usuarioLogado.id).subscribe(
       (lists) => {
         this.lists = lists;
@@ -55,7 +56,7 @@ export class TasksComponent implements OnInit {
     );
   }
 
-  private loadTasksFromFirstList(): void {
+  loadTasksFromFirstList(): void {
     if (this.lists.length > 0) {
       const firstList = this.lists[0];
 
@@ -69,10 +70,11 @@ export class TasksComponent implements OnInit {
     }
   }
 
-  private loadTasksFromSelectedList(): void {
+  loadTasksFromSelectedList(): void {
     if (this.selectedListId) {
       this.tasksService.getTasksByListId(this.selectedListId).subscribe(
         (tasks) => {
+          console.log(tasks);
           this.tasks = tasks;
         },
         (error) => {
@@ -160,7 +162,7 @@ export class TasksComponent implements OnInit {
   removeTask(task: Task): void {
     this.tasksService.deleteTasks(task.id).subscribe(
       () => {
-        const indexToRemove = this.tasks.findIndex(t => t.id === task.id);
+        const indexToRemove = this.tasks.findIndex((t) => t.id === task.id);
         if (indexToRemove !== -1) {
           this.tasks.splice(indexToRemove, 1);
           this.loadTasksFromSelectedList();
@@ -169,12 +171,29 @@ export class TasksComponent implements OnInit {
       (error) => console.error('Erro ao remover tarefa:', error)
     );
   }
-  
-  
+
+  setCompleted(task: Task): void {
+    if (task) {
+      task.completed = !task.completed;
+
+      this.tasksService.updateTasks(task.id, task).subscribe(
+        (updatedTask) => {},
+        (error) => console.error('Erro ao editar tarefa:', error),
+        () => {
+          this.loadTasksFromSelectedList();
+        }
+      );
+    }
+  }
 
   onSidenavTitleClick(listId: string): void {
     this.selectedListId = listId.toString();
 
     this.loadTasksFromSelectedList();
+  }
+
+  exit() {
+    localStorage.removeItem('usuarioLogado');
+    this.router.navigate(['']);
   }
 }

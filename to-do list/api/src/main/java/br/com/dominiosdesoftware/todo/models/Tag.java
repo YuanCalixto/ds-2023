@@ -10,7 +10,7 @@ import java.util.UUID;
 @Table(name = "tb_tag")
 @Getter
 @Setter
-public class TagModel {
+public class Tag {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)

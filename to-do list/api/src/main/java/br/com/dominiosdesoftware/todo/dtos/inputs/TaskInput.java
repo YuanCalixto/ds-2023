@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
-public record TodoInput(@NotBlank String name, @NotBlank String description, @NotNull Boolean completed, User creator,
+public record TaskInput(@NotBlank String name, @NotBlank String description, @NotNull Boolean completed, User creator,
                         @NotBlank UUID listId) {
 
 }

@@ -1,6 +1,6 @@
 package br.com.dominiosdesoftware.todo.models.user;
 
-import br.com.dominiosdesoftware.todo.models.TodoModel;
+import br.com.dominiosdesoftware.todo.models.Task;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,7 +30,7 @@ public class User implements UserDetails {
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<TodoModel> todos;
+    private List<Task> todos;
 
     public User(String login, String encryptedPassword) {
         this.login = login;
