@@ -8,15 +8,15 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from 'src/app/core/domain/service/auth.service';
 import { MaterialModule } from 'src/app/core/material/material.module';
-import { LoginRoutingModule } from './login-routing.module';
-import { LoginComponent } from './login.component';
+import { RegisterRoutingModule } from './register-routing.module';
+import { RegisterComponent } from './register.component';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [RegisterComponent],
   imports: [
     CommonModule,
     HttpClientModule,
-    LoginRoutingModule,
+    RegisterRoutingModule,
     MaterialModule,
     MatCheckboxModule,
     FormsModule,
@@ -26,4 +26,4 @@ import { LoginComponent } from './login.component';
   ],
   providers: [AuthService],
 })
-export class LoginModule {}
+export class RegisterModule {}

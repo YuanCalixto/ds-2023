@@ -1,0 +1,87 @@
+
+
+<mat-sidenav-container class="sidenav-container">
+    <!-- Sidenav Principal -->
+
+    <mat-sidenav mode="side" class="sidenav" [opened]="true">
+        <!-- Cabeçalho da Sidenav com Imagem -->
+
+        <div class="sidenav-header">
+            <mat-toolbar style="background-color: rgb(255, 255, 255);">
+                <div class="sidenav-title">
+                    Suas Listas
+                </div>
+                <div class="sidenav-logo">
+                    <img src="assets/images/Todo.png" width="80" alt="Logo" class="logo-img" />
+                </div>
+            </mat-toolbar>
+            <mat-nav-list>
+                <mat-list-item *ngFor="let list of lists" (click)="onSidenavTitleClick(list.id)">
+                    <span class="sidenav-item" >{{ list.name }}</span>
+                </mat-list-item>
+            </mat-nav-list>
+
+            <button class="add-list-button" mat-icon-button color="primary" (click)="addList()">
+                <mat-icon>add</mat-icon>
+            </button>
+
+        </div>
+    </mat-sidenav>
+
+            <!-- Sidenav Amigos -->
+
+            <!-- 
+    <mat-sidenav mode="side" class="sidenav sidenav-amigos" [opened]="true">
+      <mat-toolbar color="accent">
+        <span class="sidenav-title">Amigos</span>
+      </mat-toolbar>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let amigo of amigos">
+          <span class="sidenav-item">{{ amigo.name }}</span>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+    -->
+
+        <!-- Conteúdo Principal -->
+
+    <!-- Conteúdo Principal -->
+    <mat-sidenav-content>
+        <mat-toolbar color="white" class="mat-toolbar">
+            <span class="title">Pronto App</span>
+        
+            <span class="spacer"></span> 
+        
+            <button (click)="exit()">
+                <mat-icon style="color: #2ae37f">logout</mat-icon>
+            </button>
+        </mat-toolbar>
+        
+
+
+        <mat-card>
+            <div class="list-container">
+                    <mat-list>
+                        <mat-list-item *ngFor="let task of tasks" class="list-item">
+                            <mat-checkbox [(ngModel)]="task.completed" (change)="setCompleted(task)">
+                                {{ task.name }}
+                              </mat-checkbox>
+                              <div class="icon-container">
+                                <button mat-icon-button (click)="editTask(task)">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button mat-icon-button (click)="removeTask(task); ">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </mat-list-item>
+                    </mat-list>
+                    <div class="add-task-button-container">
+                        <button *ngIf="selectedListId != ''" class="adicionar-button" mat-icon-button color="primary" (click)="addTask()">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </mat-card>
+        </mat-sidenav-content>
+    </mat-sidenav-container>    

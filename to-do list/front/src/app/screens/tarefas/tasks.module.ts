@@ -6,24 +6,29 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { AuthService } from 'src/app/core/domain/service/auth.service';
+import { TaskService } from 'src/app/core/domain/service/task.service';
 import { MaterialModule } from 'src/app/core/material/material.module';
-import { LoginRoutingModule } from './login-routing.module';
-import { LoginComponent } from './login.component';
+import { TasksDetailsModule } from './task-details/tasks-details.module';
+import { TasksRoutingModule } from './tasks-routing.module';
+import { TasksComponent } from './tasks.component';
+import { ListService } from 'src/app/core/domain/service/list.service';
+import { ListDetailsModule } from './list-details/list-details.module';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [TasksComponent],
   imports: [
     CommonModule,
-    HttpClientModule,
-    LoginRoutingModule,
     MaterialModule,
     MatCheckboxModule,
+    HttpClientModule,
     FormsModule,
+    TasksDetailsModule,
+    ListDetailsModule,
+    TasksRoutingModule,
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
   ],
-  providers: [AuthService],
+  providers: [ListService, TaskService],
 })
-export class LoginModule {}
+export class TasksModule {}
