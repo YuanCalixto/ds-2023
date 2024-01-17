@@ -18,6 +18,9 @@
             <mat-nav-list>
                 <mat-list-item *ngFor="let list of lists" (click)="onSidenavTitleClick(list.id)">
                     <span class="sidenav-item" >{{ list.name }}</span>
+                    <button mat-icon-button (click)="removeList(list); ">
+                        <mat-icon>delete</mat-icon>
+                    </button>
                 </mat-list-item>
             </mat-nav-list>
 

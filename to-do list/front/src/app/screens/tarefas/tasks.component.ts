@@ -172,6 +172,19 @@ export class TasksComponent implements OnInit {
     );
   }
 
+  removeList(list: List): void {
+    this.listsService.deleteList(list.id).subscribe(
+      () => {
+        const indexToRemove = this.lists.findIndex((t) => t.id === list.id);
+        if (indexToRemove !== -1) {
+          this.lists.splice(indexToRemove, 1);
+          this.loadTasksFromSelectedList();
+        }
+      },
+      (error) => console.error('Erro ao remover lista:', error)
+    );
+  }
+
   setCompleted(task: Task): void {
     if (task) {
       this.tasksService.updateTasks(task.id, task).subscribe(

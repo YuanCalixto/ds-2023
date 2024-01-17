@@ -43,7 +43,7 @@ export class ListService extends HandleMessageError {
       .pipe(catchError(this.handleError));
   }
 
-  deleteList(id: number): Observable<any> {
+  deleteList(id: string): Observable<any> {
     return this.http.delete(`${environment.serverURL}/lists/${id}`)
       .pipe(catchError(this.handleError));
   }
