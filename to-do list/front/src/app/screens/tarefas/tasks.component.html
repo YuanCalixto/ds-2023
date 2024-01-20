@@ -18,13 +18,13 @@
             <mat-nav-list>
                 <mat-list-item *ngFor="let list of lists" (click)="selectList(list.id)">
                     <span class="sidenav-item" >{{ list.name }}</span>
-                    <button mat-icon-button (click)="removeList(list); ">
+                    <button mat-icon-button (click)="removeList(list);" matTooltip="Remover Lista">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </mat-list-item>
             </mat-nav-list>
 
-            <button class="add-list-button" mat-icon-button color="primary" (click)="addList()">
+            <button class="add-list-button" mat-icon-button color="primary" alt="Adicionar Lista" (click)="addList()" matTooltip="Adicionar Lista">
                 <mat-icon>add</mat-icon>
             </button>
 
@@ -72,17 +72,17 @@
                                 {{ task.name }}
                               </mat-checkbox>
                               <div class="icon-container">
-                                <button mat-icon-button (click)="editTask(task)">
+                                <button mat-icon-button (click)="editTask(task)" matTooltip="Editar Tarefa">
                                     <mat-icon>edit</mat-icon>
                                 </button>
-                                <button mat-icon-button (click)="removeTask(task); ">
+                                <button mat-icon-button (click)="removeTask(task); " matTooltip="Remover Tarefa" >
                                     <mat-icon>delete</mat-icon>
                                 </button>
                             </div>
                         </mat-list-item>
                     </mat-list>
                     <div class="add-task-button-container">
-                        <button *ngIf="selectedListId != ''" class="adicionar-button" mat-icon-button color="primary" (click)="addTask()">
+                        <button *ngIf="selectedListId != ''" class="adicionar-button" mat-icon-button color="primary" matTooltip="Adicionar Tarefa" (click)="addTask()">
                             <mat-icon>add</mat-icon>
                         </button>
                     </div>
