@@ -16,7 +16,7 @@
                 </div>
             </mat-toolbar>
             <mat-nav-list>
-                <mat-list-item *ngFor="let list of lists" (click)="onSidenavTitleClick(list.id)">
+                <mat-list-item *ngFor="let list of lists" (click)="selectList(list.id)">
                     <span class="sidenav-item" >{{ list.name }}</span>
                     <button mat-icon-button (click)="removeList(list); ">
                         <mat-icon>delete</mat-icon>
@@ -64,7 +64,9 @@
 
         <mat-card>
             <div class="list-container">
-                    <mat-list>
+
+                <h1 *ngIf="selectedListId == ''" style="text-align: center; margin-top: 5%;">Sem lista selecionada!</h1>
+                <mat-list>
                         <mat-list-item *ngFor="let task of tasks" class="list-item">
                             <mat-checkbox [(ngModel)]="task.completed" (change)="setCompleted(task)">
                                 {{ task.name }}

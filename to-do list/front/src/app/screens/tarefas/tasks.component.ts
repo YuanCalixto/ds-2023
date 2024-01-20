@@ -6,8 +6,8 @@ import { Task } from 'src/app/core/domain/entity/task';
 import { User } from 'src/app/core/domain/entity/user';
 import { ListService } from 'src/app/core/domain/service/list.service';
 import { TaskService } from 'src/app/core/domain/service/task.service';
-import { TasksDetailsDialog } from './task-details/tasks-details.dialog';
 import { ListDetailsDialog } from './list-details/list-details.dialog';
+import { TasksDetailsDialog } from './task-details/tasks-details.dialog';
 
 @Component({
   selector: 'app-tasks',
@@ -128,6 +128,7 @@ export class TasksComponent implements OnInit {
               this.lists.push(newList);
             }
             this.loadAllListsByUser();
+            this.selectList(newList.id);
           },
           (error) => console.error('Erro ao adicionar lista:', error)
         );
@@ -179,6 +180,7 @@ export class TasksComponent implements OnInit {
         if (indexToRemove !== -1) {
           this.lists.splice(indexToRemove, 1);
           this.loadTasksFromSelectedList();
+          this.selectedListId = '';
         }
       },
       (error) => console.error('Erro ao remover lista:', error)
@@ -197,7 +199,7 @@ export class TasksComponent implements OnInit {
     }
   }
 
-  onSidenavTitleClick(listId: string): void {
+  selectList(listId: string): void {
     this.selectedListId = listId.toString();
 
     this.loadTasksFromSelectedList();

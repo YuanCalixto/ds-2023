@@ -3,7 +3,11 @@ package br.com.dominiosdesoftware.todo.controllers;
 import br.com.dominiosdesoftware.todo.dtos.inputs.ListInput;
 import br.com.dominiosdesoftware.todo.dtos.outputs.ListOutput;
 import br.com.dominiosdesoftware.todo.models.List;
+import br.com.dominiosdesoftware.todo.models.Tag;
+import br.com.dominiosdesoftware.todo.models.Task;
 import br.com.dominiosdesoftware.todo.services.ListService;
+import br.com.dominiosdesoftware.todo.services.TagService;
+import br.com.dominiosdesoftware.todo.services.TaskService;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,10 +28,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class ListController {
 
   private final ListService listService;
+  private final TagService tagService;
+  private final TaskService taskService;
 
   @Autowired
-  public ListController(ListService listService) {
+  public ListController(ListService listService, TagService tagService, TaskService taskService) {
     this.listService = listService;
+    this.tagService = tagService;
+    this.taskService = taskService;
   }
 
   @PostMapping
@@ -74,11 +82,26 @@ public class ListController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<ListOutput> delete(@PathVariable Integer id) {
+  public ResponseEntity<ListOutput> deleteList(@PathVariable Integer id) {
     List list = listService.findById(id);
+
+    java.util.List<Task> tasks = taskService.findByListId(list.getId());
+
+    for (Task task : tasks) {
+      java.util.List<Tag> tags = tagService.findByTaskId(task.getId());
+
+      for (Tag tag : tags) {
+        tagService.delete(tag);
+      }
+
+      taskService.delete(task);
+    }
+
     listService.delete(list);
+
     return ResponseEntity.status(HttpStatus.OK).body(new ListOutput(list));
   }
+
 }
 
 
