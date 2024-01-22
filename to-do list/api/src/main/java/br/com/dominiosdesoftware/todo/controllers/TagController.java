@@ -59,7 +59,7 @@ public class TagController {
     return ResponseEntity.status(HttpStatus.OK).body(tagOutput);
   }
 
-  @GetMapping("/task/{taskId}")
+  @GetMapping("/task/{listId}")
   public ResponseEntity<List<TagOutput>> findByTaskId(@PathVariable Integer taskId) {
     List<Tag> tags = tagService.findByTaskId(taskId);
     List<TagOutput> tagOutputs = tags.stream().map(TagOutput::new).toList();

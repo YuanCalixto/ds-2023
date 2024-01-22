@@ -4,9 +4,12 @@ import { Router } from '@angular/router';
 import { List } from 'src/app/core/domain/entity/list';
 import { Task } from 'src/app/core/domain/entity/task';
 import { User } from 'src/app/core/domain/entity/user';
+import { UserList } from 'src/app/core/domain/entity/user-list';
 import { ListService } from 'src/app/core/domain/service/list.service';
 import { TaskService } from 'src/app/core/domain/service/task.service';
+import { UserListService } from 'src/app/core/domain/service/user-list.service';
 import { ListDetailsDialog } from './list-details/list-details.dialog';
+import { ShareListDialog } from './share-list/share-list.dialog';
 import { TasksDetailsDialog } from './task-details/tasks-details.dialog';
 
 @Component({
@@ -21,12 +24,14 @@ export class TasksComponent implements OnInit {
 
   tasks: Task[] = [];
   lists: List[] = [];
+  sharedLists: UserList[] = [];
   friends: User[] = [];
 
   constructor(
     private cdRef: ChangeDetectorRef,
     private listsService: ListService,
     private tasksService: TaskService,
+    private userListService: UserListService,
     private dialog: MatDialog,
     private router: Router
   ) {}
@@ -42,6 +47,7 @@ export class TasksComponent implements OnInit {
     this.darkMode = darkModeValue === 'true';
 
     this.loadAllListsByUser();
+    this.loadAllSharedListsByUser();
     this.loadTasksFromFirstList();
   }
 
@@ -49,6 +55,17 @@ export class TasksComponent implements OnInit {
     this.listsService.getAllListsByUser(this.usuarioLogado.id).subscribe(
       (lists) => {
         this.lists = lists;
+      },
+      (error) => {
+        console.error('Erro ao carregar listas do usuário:', error);
+      }
+    );
+  }
+
+  loadAllSharedListsByUser(): void {
+    this.userListService.getUserListByUser(this.usuarioLogado.id).subscribe(
+      (lists) => {
+        this.sharedLists = lists;
       },
       (error) => {
         console.error('Erro ao carregar listas do usuário:', error);
@@ -90,7 +107,6 @@ export class TasksComponent implements OnInit {
     const dialogRef = this.dialog.open(TasksDetailsDialog, {
       data: { task: {} as Task },
       width: '500px',
-      height: '400px',
     });
 
     dialogRef.afterClosed().subscribe((task: Task) => {
@@ -116,7 +132,6 @@ export class TasksComponent implements OnInit {
     const dialogRef = this.dialog.open(ListDetailsDialog, {
       data: { list: {} as List },
       width: '500px',
-      height: '400px',
     });
 
     dialogRef.afterClosed().subscribe((list: List) => {
@@ -140,7 +155,6 @@ export class TasksComponent implements OnInit {
     const dialogRef = this.dialog.open(TasksDetailsDialog, {
       data: { task: task },
       width: '500px',
-      height: '400px',
     });
 
     dialogRef.afterClosed().subscribe((editedTask: Task) => {
@@ -185,6 +199,52 @@ export class TasksComponent implements OnInit {
       },
       (error) => console.error('Erro ao remover lista:', error)
     );
+  }
+
+  removeSharedList(list: List): void {
+    this.listsService.deleteList(list.id).subscribe(
+      () => {
+        const indexToRemove = this.lists.findIndex((t) => t.id === list.id);
+        if (indexToRemove !== -1) {
+          this.lists.splice(indexToRemove, 1);
+          this.loadTasksFromSelectedList();
+          this.selectedListId = '';
+        }
+      },
+      (error) => console.error('Erro ao remover lista:', error)
+    );
+  }
+
+  shareList(list: List): void {
+    console.log(list);
+
+    const dialogRef = this.dialog.open(ShareListDialog, {
+      data: { list: list },
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe((username: string) => {
+      if (username) {
+        const userList: any = {
+          username: username,
+          listId: list.id,
+        };
+
+        this.userListService.createUserList(userList).subscribe(
+          (createdUserList) => {
+            this.userListService.showMessage(
+              'Lista compartilhada com sucesso!'
+            );
+          },
+          (error) =>
+            this.userListService.showMessage(
+              'Usuário não encontrado ou lista já compartilhada!'
+            )
+        );
+      }
+
+      this.loadTasksFromSelectedList();
+    });
   }
 
   setCompleted(task: Task): void {

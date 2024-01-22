@@ -5,9 +5,11 @@ import br.com.dominiosdesoftware.todo.dtos.outputs.ListOutput;
 import br.com.dominiosdesoftware.todo.models.List;
 import br.com.dominiosdesoftware.todo.models.Tag;
 import br.com.dominiosdesoftware.todo.models.Task;
+import br.com.dominiosdesoftware.todo.models.UserList;
 import br.com.dominiosdesoftware.todo.services.ListService;
 import br.com.dominiosdesoftware.todo.services.TagService;
 import br.com.dominiosdesoftware.todo.services.TaskService;
+import br.com.dominiosdesoftware.todo.services.UserListService;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,12 +32,15 @@ public class ListController {
   private final ListService listService;
   private final TagService tagService;
   private final TaskService taskService;
+  private final UserListService userListService;
 
   @Autowired
-  public ListController(ListService listService, TagService tagService, TaskService taskService) {
+  public ListController(ListService listService, TagService tagService, TaskService taskService,
+      UserListService userListService) {
     this.listService = listService;
     this.tagService = tagService;
     this.taskService = taskService;
+    this.userListService = userListService;
   }
 
   @PostMapping
@@ -86,6 +91,12 @@ public class ListController {
     List list = listService.findById(id);
 
     java.util.List<Task> tasks = taskService.findByListId(list.getId());
+
+    java.util.List<UserList> userLists = userListService.findByListId(list.getId());
+
+    for (UserList userList : userLists) {
+      userListService.delete(userList);
+    }
 
     for (Task task : tasks) {
       java.util.List<Tag> tags = tagService.findByTaskId(task.getId());

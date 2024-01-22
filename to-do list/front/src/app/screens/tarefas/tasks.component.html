@@ -21,13 +21,30 @@
                     <button mat-icon-button (click)="removeList(list);" matTooltip="Remover Lista">
                         <mat-icon>delete</mat-icon>
                     </button>
+                    <button mat-icon-button (click)="shareList(list);" matTooltip="Compartilhar Lista">
+                        <mat-icon>share</mat-icon>
+                    </button>
                 </mat-list-item>
             </mat-nav-list>
 
+            
             <button class="add-list-button" mat-icon-button color="primary" alt="Adicionar Lista" (click)="addList()" matTooltip="Adicionar Lista">
                 <mat-icon>add</mat-icon>
             </button>
 
+            <mat-toolbar *ngIf="sharedLists.length>0" style="background-color: rgb(255, 255, 255);">
+                <div class="sidenav-title">
+                    Listas Compartilhadas
+                </div>
+            </mat-toolbar>
+            <mat-nav-list>
+                <mat-list-item *ngFor="let sharedList of sharedLists" (click)="selectList(sharedList.list.id)">
+                    <span class="sidenav-item" >{{ sharedList.list.name }}</span>
+                    <button mat-icon-button (click)="removeSharedList(sharedList.list);" matTooltip="Remover Lista">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-list-item>
+            </mat-nav-list>
         </div>
     </mat-sidenav>
 
