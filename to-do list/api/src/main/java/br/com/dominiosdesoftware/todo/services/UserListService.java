@@ -17,12 +17,16 @@ public class UserListService {
     return userListRepository.save(userList);
   }
 
+  public void delete(UserList userList) {
+    userListRepository.delete(userList);
+  }
+
   public List<UserList> findAll() {
     return userListRepository.findAll();
   }
 
-  public UserList findById(Integer id) {
-    return userListRepository.findById(id).orElse(null);
+  public UserList findById(UUID id) {
+    return userListRepository.findById(id);
   }
 
   public List<UserList> findByUserId(UUID userId) {
@@ -31,10 +35,6 @@ public class UserListService {
 
   public List<UserList> findByListId(Integer taskId) {
     return userListRepository.findByListId(taskId);
-  }
-
-  public void delete(UserList userList) {
-    userListRepository.delete(userList);
   }
 
 }

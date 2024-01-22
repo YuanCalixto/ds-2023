@@ -43,18 +43,6 @@ public class ListController {
     this.userListService = userListService;
   }
 
-  @PostMapping
-  public ResponseEntity<ListOutput> save(@RequestBody ListInput listInput) {
-    List list = new List();
-    list.setName(listInput.name());
-    list.setUser(listInput.user());
-
-    List savedList = listService.save(list);
-    ListOutput listOutput = new ListOutput(savedList);
-
-    return ResponseEntity.status(HttpStatus.CREATED).body(listOutput);
-  }
-
   @GetMapping
   public ResponseEntity<java.util.List<ListOutput>> findAll() {
     java.util.List<List> allLists = listService.findAll();
@@ -66,6 +54,18 @@ public class ListController {
   public ResponseEntity<ListOutput> findById(@PathVariable Integer id) {
     List list = listService.findById(id);
     return ResponseEntity.status(HttpStatus.OK).body(new ListOutput(list));
+  }
+
+  @PostMapping
+  public ResponseEntity<ListOutput> save(@RequestBody ListInput listInput) {
+    List list = new List();
+    list.setName(listInput.name());
+    list.setUser(listInput.user());
+
+    List savedList = listService.save(list);
+    ListOutput listOutput = new ListOutput(savedList);
+
+    return ResponseEntity.status(HttpStatus.CREATED).body(listOutput);
   }
 
   @PostMapping("/user/{userId}")

@@ -37,23 +37,6 @@ public class TaskController {
     this.taskService = taskService;
   }
 
-  @PostMapping
-  public ResponseEntity<TaskOutput> save(@RequestBody TaskInput taskInput) {
-    List list = listService.findById(taskInput.listId());
-
-    Task task = new Task();
-    task.setName(taskInput.name());
-    task.setDescription(taskInput.description());
-    task.setUser(taskInput.user());
-    task.setList(list);
-
-    Task savedTask = taskService.save(task);
-
-    TaskOutput taskOutput = new TaskOutput(savedTask);
-
-    return ResponseEntity.status(HttpStatus.CREATED).body(taskOutput);
-  }
-
   @GetMapping
   public ResponseEntity<java.util.List<Task>> findAll() {
     java.util.List<Task> allTodos = taskService.findAll();
@@ -77,6 +60,22 @@ public class TaskController {
     return ResponseEntity.status(HttpStatus.OK).body(taskOutput);
   }
 
+  @PostMapping
+  public ResponseEntity<TaskOutput> save(@RequestBody TaskInput taskInput) {
+    List list = listService.findById(taskInput.listId());
+
+    Task task = new Task();
+    task.setName(taskInput.name());
+    task.setDescription(taskInput.description());
+    task.setUser(taskInput.user());
+    task.setList(list);
+
+    Task savedTask = taskService.save(task);
+
+    TaskOutput taskOutput = new TaskOutput(savedTask);
+
+    return ResponseEntity.status(HttpStatus.CREATED).body(taskOutput);
+  }
 
   @PutMapping("/{id}")
   public ResponseEntity<TaskOutput> update(@PathVariable Integer id, @RequestBody TaskInput taskInput) {

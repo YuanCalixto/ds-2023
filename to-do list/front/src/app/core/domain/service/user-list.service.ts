@@ -14,6 +14,24 @@ export class UserListService extends HandleMessageError {
     super(snackBar);
   }
 
+  // CREATE
+
+  createUserList(userList: any): Observable<UserList> {
+    return this.http
+      .post<UserList>(`${environment.serverURL}/userLists`, userList)
+      .pipe(catchError(this.handleError));
+  }
+
+  // DELETE
+
+  deleteUserList(userListId: number): Observable<void> {
+    return this.http
+      .delete<void>(`${environment.serverURL}/userLists/${userListId}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  // GET
+
   getAllUserLists(): Observable<any> {
     return this.http
       .get<any>(`${environment.serverURL}/userLists/all`)
@@ -26,12 +44,6 @@ export class UserListService extends HandleMessageError {
         `${environment.serverURL}/userLists/user/${userId}`,
         null
       )
-      .pipe(catchError(this.handleError));
-  }
-
-  createUserList(userList: any): Observable<UserList> {
-    return this.http
-      .post<UserList>(`${environment.serverURL}/userLists`, userList)
       .pipe(catchError(this.handleError));
   }
 }

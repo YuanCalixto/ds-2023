@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserListRepository extends JpaRepository<UserList, Integer> {
 
+  UserList findById(UUID userListId);
+
   List<UserList> findByUserId(UUID userId);
 
   List<UserList> findByListId(Integer taskId);

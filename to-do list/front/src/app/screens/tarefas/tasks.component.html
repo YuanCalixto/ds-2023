@@ -40,7 +40,7 @@
             <mat-nav-list>
                 <mat-list-item *ngFor="let sharedList of sharedLists" (click)="selectList(sharedList.list.id)">
                     <span class="sidenav-item" >{{ sharedList.list.name }}</span>
-                    <button mat-icon-button (click)="removeSharedList(sharedList.list);" matTooltip="Remover Lista">
+                    <button mat-icon-button (click)="removeSharedList(sharedList);" matTooltip="Remover Lista">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </mat-list-item>

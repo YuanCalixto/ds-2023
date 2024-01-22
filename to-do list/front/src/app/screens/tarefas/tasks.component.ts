@@ -91,7 +91,6 @@ export class TasksComponent implements OnInit {
     if (this.selectedListId) {
       this.tasksService.getTasksByListId(this.selectedListId).subscribe(
         (tasks) => {
-          console.log(tasks);
           this.tasks = tasks;
         },
         (error) => {
@@ -201,23 +200,23 @@ export class TasksComponent implements OnInit {
     );
   }
 
-  removeSharedList(list: List): void {
-    this.listsService.deleteList(list.id).subscribe(
+  removeSharedList(userList: UserList): void {
+    this.userListService.deleteUserList(userList.id).subscribe(
       () => {
-        const indexToRemove = this.lists.findIndex((t) => t.id === list.id);
+        const indexToRemove = this.sharedLists.findIndex(
+          (t) => t.list.id === userList.list.id
+        );
         if (indexToRemove !== -1) {
-          this.lists.splice(indexToRemove, 1);
-          this.loadTasksFromSelectedList();
+          this.sharedLists.splice(indexToRemove, 1);
           this.selectedListId = '';
         }
+        this.tasks = [];
       },
-      (error) => console.error('Erro ao remover lista:', error)
+      (error) => console.error('Erro ao remover lista compartilhada:', error)
     );
   }
 
   shareList(list: List): void {
-    console.log(list);
-
     const dialogRef = this.dialog.open(ShareListDialog, {
       data: { list: list },
       width: '500px',
