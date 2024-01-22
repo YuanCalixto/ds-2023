@@ -68,7 +68,7 @@
     <!-- Conteúdo Principal -->
     <mat-sidenav-content>
         <mat-toolbar color="white" class="mat-toolbar">
-            <span class="title">Pronto App</span>
+            <span *ngIf="selectedListId==''" class="title">Pronto App</span>
         
             <span class="spacer"></span> 
         
@@ -85,6 +85,10 @@
 
         <mat-card>
             <div class="list-container">
+
+                <mat-list-item *ngFor="let list of lists">
+                    <span *ngIf="list.id == selectedListId" class="title" style="font-size: 1.5em; margin-bottom: 5%;">{{ list.name }}</span>
+                </mat-list-item>
 
                 <h1 *ngIf="selectedListId == ''" style="text-align: center; margin-top: 5%;">Sem lista selecionada!</h1>
                 <h1 *ngIf="tasks.length < 1 && selectedListId != '' " style="text-align: center; margin-top: 5%;">Lista vazia! Adicione tarefas para começar</h1>
