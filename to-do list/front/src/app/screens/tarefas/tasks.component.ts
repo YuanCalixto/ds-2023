@@ -228,7 +228,9 @@ export class TasksComponent implements OnInit {
   }
 
   removeSharedList(userList: UserList): void {
-    const dialogRef = this.dialog.open(ListDeleteDialog);
+    const dialogRef = this.dialog.open(ListDeleteDialog, {
+      data: userList.list,
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
