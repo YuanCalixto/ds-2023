@@ -8,8 +8,10 @@ import { UserList } from 'src/app/core/domain/entity/user-list';
 import { ListService } from 'src/app/core/domain/service/list.service';
 import { TaskService } from 'src/app/core/domain/service/task.service';
 import { UserListService } from 'src/app/core/domain/service/user-list.service';
+import { ListDeleteDialog } from './list-delete/list-delete.dialog';
 import { ListDetailsDialog } from './list-details/list-details.dialog';
 import { ShareListDialog } from './share-list/share-list.dialog';
+import { TaskDeleteDialog } from './task-delete/task-delete.dialog';
 import { TasksDetailsDialog } from './task-details/tasks-details.dialog';
 
 @Component({
@@ -174,46 +176,69 @@ export class TasksComponent implements OnInit {
   }
 
   removeTask(task: Task): void {
-    this.tasksService.deleteTasks(task.id).subscribe(
-      () => {
-        const indexToRemove = this.tasks.findIndex((t) => t.id === task.id);
-        if (indexToRemove !== -1) {
-          this.tasks.splice(indexToRemove, 1);
-          this.loadTasksFromSelectedList();
-        }
-      },
-      (error) => console.error('Erro ao remover tarefa:', error)
-    );
+    const dialogRef = this.dialog.open(TaskDeleteDialog, {
+      data: task,
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.tasksService.deleteTasks(task.id).subscribe(
+          () => {
+            const indexToRemove = this.tasks.findIndex((t) => t.id === task.id);
+            if (indexToRemove !== -1) {
+              this.tasks.splice(indexToRemove, 1);
+              this.loadTasksFromSelectedList();
+            }
+          },
+          (error) => console.error('Erro ao remover tarefa:', error)
+        );
+      }
+    });
   }
 
   removeList(list: List): void {
-    this.listsService.deleteList(list.id).subscribe(
-      () => {
-        const indexToRemove = this.lists.findIndex((t) => t.id === list.id);
-        if (indexToRemove !== -1) {
-          this.lists.splice(indexToRemove, 1);
-          this.loadTasksFromSelectedList();
-          this.selectedListId = '';
-        }
-      },
-      (error) => console.error('Erro ao remover lista:', error)
-    );
+    const dialogRef = this.dialog.open(ListDeleteDialog, {
+      data: list,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.listsService.deleteList(list.id).subscribe(
+          () => {
+            const indexToRemove = this.lists.findIndex((t) => t.id === list.id);
+            if (indexToRemove !== -1) {
+              this.lists.splice(indexToRemove, 1);
+              this.loadTasksFromSelectedList();
+              this.selectedListId = '';
+            }
+          },
+          (error) => console.error('Erro ao remover lista:', error)
+        );
+      }
+    });
   }
 
   removeSharedList(userList: UserList): void {
-    this.userListService.deleteUserList(userList.id).subscribe(
-      () => {
-        const indexToRemove = this.sharedLists.findIndex(
-          (t) => t.list.id === userList.list.id
+    const dialogRef = this.dialog.open(ListDeleteDialog);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.userListService.deleteUserList(userList.id).subscribe(
+          () => {
+            const indexToRemove = this.sharedLists.findIndex(
+              (t) => t.list.id === userList.list.id
+            );
+            if (indexToRemove !== -1) {
+              this.sharedLists.splice(indexToRemove, 1);
+              this.selectedListId = '';
+            }
+            this.tasks = [];
+          },
+          (error) =>
+            console.error('Erro ao remover lista compartilhada:', error)
         );
-        if (indexToRemove !== -1) {
-          this.sharedLists.splice(indexToRemove, 1);
-          this.selectedListId = '';
-        }
-        this.tasks = [];
-      },
-      (error) => console.error('Erro ao remover lista compartilhada:', error)
-    );
+      }
+    });
   }
 
   shareList(list: List): void {

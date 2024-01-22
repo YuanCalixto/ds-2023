@@ -10,8 +10,10 @@ import { ListService } from 'src/app/core/domain/service/list.service';
 import { TaskService } from 'src/app/core/domain/service/task.service';
 import { UserListService } from 'src/app/core/domain/service/user-list.service';
 import { MaterialModule } from 'src/app/core/material/material.module';
+import { ListDeleteModule } from './list-delete/list-delete.module';
 import { ListDetailsModule } from './list-details/list-details.module';
 import { ShareListModule } from './share-list/share-list.module';
+import { TaskDeleteModule } from './task-delete/task-delete.module';
 import { TasksDetailsModule } from './task-details/tasks-details.module';
 import { TasksRoutingModule } from './tasks-routing.module';
 import { TasksComponent } from './tasks.component';
@@ -28,8 +30,10 @@ import { TasksComponent } from './tasks.component';
     MaterialModule,
     MatIconModule,
 
+    ListDeleteModule,
     ListDetailsModule,
     ShareListModule,
+    TaskDeleteModule,
     TasksDetailsModule,
     TasksRoutingModule,
   ],
