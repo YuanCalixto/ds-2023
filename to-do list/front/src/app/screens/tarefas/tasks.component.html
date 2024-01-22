@@ -1,0 +1,125 @@
+
+
+<mat-sidenav-container class="sidenav-container">
+    <!-- Sidenav Principal -->
+
+    <mat-sidenav mode="side" class="sidenav" [opened]="true">
+        <!-- Cabeçalho da Sidenav com Imagem -->
+
+        <div class="sidenav-header">
+            <mat-toolbar style="background-color: rgb(255, 255, 255);">
+                <div class="sidenav-title">
+                    Suas Listas
+                </div>
+                <div class="sidenav-logo">
+                    <img src="assets/images/Todo.png" width="80" alt="Logo" class="logo-img" />
+                </div>
+            </mat-toolbar>
+            <mat-nav-list>
+                <mat-list-item *ngFor="let list of lists" (click)="selectList(list.id)">    
+                    <span class="sidenav-item" >{{ list.name }}</span>
+                                             <button mat-icon-button (click)="editList(list)" matTooltip="Editar Lista" style="font-size: 20px; width: 32px; height: 32px; text-align: end ">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    
+                        <button mat-icon-button (click)="removeList(list);" matTooltip="Remover Lista" style="font-size: 20px; width: 32px; height: 32px; text-align: end">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    
+                        <button mat-icon-button (click)="shareList(list);" matTooltip="Compartilhar Lista" style="font-size: 20px; width: 32px; height: 32px; text-align: end">
+                            <mat-icon>share</mat-icon>
+                        </button>
+                    
+                </mat-list-item>
+            </mat-nav-list>
+
+            
+            <button class="add-list-button" mat-icon-button color="primary" alt="Adicionar Lista" (click)="addList()" matTooltip="Adicionar Lista">
+                <mat-icon>add</mat-icon>
+            </button>
+
+            <mat-toolbar *ngIf="sharedLists.length>0" style="background-color: rgb(255, 255, 255);">
+                <div class="sidenav-title">
+                    Listas Compartilhadas
+                </div>
+            </mat-toolbar>
+            <mat-nav-list>
+                <mat-list-item *ngFor="let sharedList of sharedLists" (click)="selectList(sharedList.list.id)">
+                    <span class="sidenav-item" >{{ sharedList.list.name }}</span>
+                    <button mat-icon-button (click)="removeSharedList(sharedList);" matTooltip="Remover Lista">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-list-item>
+            </mat-nav-list>
+        </div>
+    </mat-sidenav>
+
+            <!-- Sidenav Amigos -->
+
+            <!-- 
+    <mat-sidenav mode="side" class="sidenav sidenav-amigos" [opened]="true">
+      <mat-toolbar color="accent">
+        <span class="sidenav-title">Amigos</span>
+      </mat-toolbar>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let amigo of amigos">
+          <span class="sidenav-item">{{ amigo.name }}</span>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+    -->
+
+        <!-- Conteúdo Principal -->
+
+    <!-- Conteúdo Principal -->
+    <mat-sidenav-content>
+        <mat-toolbar color="white" class="mat-toolbar">
+            <span *ngIf="selectedListId==''" class="title">Pronto App</span>
+        
+            <span class="spacer"></span> 
+        
+            <button (click)="editProfile()">
+                <mat-icon style="color: #2ae37f; margin-right: 10px; border: none;" matTooltip="Editar Perfil">account_circle</mat-icon>
+            </button>
+
+            <button (click)="exit()">
+                <mat-icon style="color: #2ae37f" matTooltip="Sair">logout</mat-icon>
+            </button>
+        </mat-toolbar>
+        
+
+
+        <mat-card>
+            <div class="list-container">
+
+                <mat-list-item *ngFor="let list of lists">
+                    <span *ngIf="list.id == selectedListId" class="title" style="font-size: 1.5em; margin-bottom: 5%;">{{ list.name }}</span>
+                </mat-list-item>
+
+                <h1 *ngIf="selectedListId == ''" style="text-align: center; margin-top: 5%;">Sem lista selecionada!</h1>
+                <h1 *ngIf="tasks.length < 1 && selectedListId != '' " style="text-align: center; margin-top: 5%;">Lista vazia! Adicione tarefas para começar</h1>
+
+                <mat-list>
+                        <mat-list-item *ngFor="let task of tasks" class="list-item">
+                            <mat-checkbox [(ngModel)]="task.completed" (change)="setCompleted(task)">
+                                {{ task.name }}
+                              </mat-checkbox>
+                              <div class="icon-container">
+                                <button mat-icon-button (click)="editTask(task)" matTooltip="Editar Tarefa">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button mat-icon-button (click)="removeTask(task); " matTooltip="Remover Tarefa" >
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </mat-list-item>
+                    </mat-list>
+                    <div class="add-task-button-container">
+                        <button *ngIf="selectedListId != ''" class="adicionar-button" mat-icon-button color="primary" matTooltip="Adicionar Tarefa" (click)="addTask()">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </mat-card>
+        </mat-sidenav-content>
+    </mat-sidenav-container>    

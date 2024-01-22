@@ -1,0 +1,54 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+
+<button class="dark-mode-toggle" (click)="toggleDarkMode()">
+  <mat-icon style="color: #2ae37f">dark_mode</mat-icon>
+</button>
+
+
+
+<div *ngIf="!darkMode">
+  <div class="login-container">
+    <div class="logo-container">
+      <img src="assets/images/Todo.png" width="119" alt="Logo" class="logo-img" />
+      <h1 class="login-title">Pronto</h1>
+    </div>
+    <h2 class="login-subtitle">Criar conta</h2>
+    <form (submit)="registerSample()" method="post">
+      <br>
+      <div class="form-group">
+        <input type="text" [(ngModel)]="loginData.login" class="login-input" id="login" name="login" placeholder="Username">
+      </div>
+      <br>
+      <div class="form-group">
+        <input type="password" [(ngModel)]="loginData.password" class="login-input" id="senha" name="senha" placeholder="Senha">
+      </div>
+      <br>
+      <button type="submit" class="login-button">Criar</button>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="darkMode" style="background-color: #131313">
+  <div class="login-container-dark" >
+    <div class="logo-container-dark" >
+      <img src="assets/images/TodoDark.png" width="119" alt="Logo" class="logo-img" />
+      
+      <h1 class="login-title-dark">Pronto</h1>
+    </div>
+    <h2 class="login-subtitle-dark">Criar conta</h2>
+    <form (submit)="registerSample()" method="post">
+      <br>
+      <div class="form-group">
+        <input type="text" [(ngModel)]="loginData.login" class="login-input-dark" id="login" name="login" placeholder="Username">
+      </div>
+      <br>
+      <div class="form-group">
+        <input type="password" [(ngModel)]="loginData.password" class="login-input-dark" id="senha" name="senha" placeholder="Senha">
+      </div>
+      <br>
+      <button type="submit"  class="login-button">Criar</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+.dialog-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog-content {
+  max-width: 80vw;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  margin-top: 0;
+}
+
+.dialog-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.mat-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.mat-chip {
+  margin: 0 4px 4px 0;
+}
+
+.button {
+  margin: 10px 5px 0 0;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-field {
+  margin-bottom: 16px;
+}
+
+.add-button {
+  border-radius: 50%;
+  background-color: #009933;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .dialog-content {
+    max-width: 95vw;
+  }
+}
