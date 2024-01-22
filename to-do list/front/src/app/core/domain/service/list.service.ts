@@ -24,9 +24,9 @@ export class ListService extends HandleMessageError {
 
   // UPDATE
 
-  updateList(id: number, list: List): Observable<List> {
+  updateList(list: any): Observable<List> {
     return this.http
-      .put<List>(`${environment.serverURL}/lists/${id}`, list)
+      .put<List>(`${environment.serverURL}/lists/${list.id}`, list)
       .pipe(catchError(this.handleError));
   }
 

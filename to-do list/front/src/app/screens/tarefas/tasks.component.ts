@@ -184,6 +184,29 @@ export class TasksComponent implements OnInit {
     this.loadTasksFromSelectedList();
   }
 
+  editList(list: List): void {
+    const dialogRef = this.dialog.open(ListDetailsDialog, {
+      data: { list: { ...list } },
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe((list: List) => {
+      if (list) {
+        list.user = this.usuarioLogado;
+        this.listsService.updateList(list).subscribe(
+          (newList) => {
+            if (!this.lists.some((t) => t.id === newList.id)) {
+              this.lists.push(newList);
+            }
+            this.loadAllListsByUser();
+            this.selectList(newList.id);
+          },
+          (error) => console.error('Erro ao adicionar lista:', error)
+        );
+      }
+    });
+  }
+
   removeTask(task: Task): void {
     const dialogRef = this.dialog.open(TaskDeleteDialog, {
       data: task,

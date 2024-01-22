@@ -16,14 +16,20 @@
                 </div>
             </mat-toolbar>
             <mat-nav-list>
-                <mat-list-item *ngFor="let list of lists" (click)="selectList(list.id)">
+                <mat-list-item *ngFor="let list of lists" (click)="selectList(list.id)">    
                     <span class="sidenav-item" >{{ list.name }}</span>
-                    <button mat-icon-button (click)="removeList(list);" matTooltip="Remover Lista">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                    <button mat-icon-button (click)="shareList(list);" matTooltip="Compartilhar Lista">
-                        <mat-icon>share</mat-icon>
-                    </button>
+                                             <button mat-icon-button (click)="editList(list)" matTooltip="Editar Lista" style="font-size: 20px; width: 32px; height: 32px; text-align: end ">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    
+                        <button mat-icon-button (click)="removeList(list);" matTooltip="Remover Lista" style="font-size: 20px; width: 32px; height: 32px; text-align: end">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    
+                        <button mat-icon-button (click)="shareList(list);" matTooltip="Compartilhar Lista" style="font-size: 20px; width: 32px; height: 32px; text-align: end">
+                            <mat-icon>share</mat-icon>
+                        </button>
+                    
                 </mat-list-item>
             </mat-nav-list>
 
