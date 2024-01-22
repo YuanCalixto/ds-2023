@@ -7,7 +7,6 @@ import br.com.dominiosdesoftware.todo.models.Task;
 import br.com.dominiosdesoftware.todo.services.TagService;
 import br.com.dominiosdesoftware.todo.services.TaskService;
 import java.util.List;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,18 +33,6 @@ public class TagController {
     this.tagService = tagService;
   }
 
-
-  @PostMapping
-  public ResponseEntity<TagOutput> save(@RequestBody TagInput tagInput) {
-    Task task = taskService.findById(tagInput.taskId());
-    Tag tag = new Tag();
-    tag.setName(tagInput.name());
-    tag.setTask(task);
-    Tag savedTag = tagService.save(tag);
-    TagOutput tagOutput = new TagOutput(savedTag);
-    return ResponseEntity.status(HttpStatus.CREATED).body(tagOutput);
-  }
-
   @GetMapping
   public ResponseEntity<List<Tag>> findAll() {
     List<Tag> allTags = tagService.findAll();
@@ -59,11 +46,22 @@ public class TagController {
     return ResponseEntity.status(HttpStatus.OK).body(tagOutput);
   }
 
-  @GetMapping("/task/{taskId}")
+  @GetMapping("/task/{listId}")
   public ResponseEntity<List<TagOutput>> findByTaskId(@PathVariable Integer taskId) {
     List<Tag> tags = tagService.findByTaskId(taskId);
     List<TagOutput> tagOutputs = tags.stream().map(TagOutput::new).toList();
     return ResponseEntity.status(HttpStatus.OK).body(tagOutputs);
+  }
+
+  @PostMapping
+  public ResponseEntity<TagOutput> save(@RequestBody TagInput tagInput) {
+    Task task = taskService.findById(tagInput.taskId());
+    Tag tag = new Tag();
+    tag.setName(tagInput.name());
+    tag.setTask(task);
+    Tag savedTag = tagService.save(tag);
+    TagOutput tagOutput = new TagOutput(savedTag);
+    return ResponseEntity.status(HttpStatus.CREATED).body(tagOutput);
   }
 
   @DeleteMapping("/{id}")

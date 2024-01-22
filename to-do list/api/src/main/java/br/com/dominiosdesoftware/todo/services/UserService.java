@@ -27,6 +27,10 @@ public class UserService {
     return optionalUser.orElse(null);
   }
 
+  public User findByLogin(String login) {
+    return userRepository.findCustomByLogin(login);
+  }
+
   public User findByLoginAndPass(String login, String pass) {
     return userRepository.findByLoginAndPassword(login, pass);
   }

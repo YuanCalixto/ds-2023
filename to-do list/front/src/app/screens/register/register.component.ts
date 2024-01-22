@@ -32,7 +32,9 @@ export class RegisterComponent implements OnInit {
     } else if (this.loginData.login.trim().length < 1) {
       this.authService.showMessage('Usuário não pode ser vazio.');
     } else if (this.loginData.password.trim().length < 8) {
-      this.authService.showMessage('A senha deve ter pelo menos 8 caracteres válidos.');
+      this.authService.showMessage(
+        'A senha deve ter pelo menos 8 caracteres válidos.'
+      );
     } else {
       this.authService.registerSample(this.loginData).subscribe(
         (response) => {
@@ -40,7 +42,7 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/tasks']);
         },
         (error) => {
-          this.authService.showMessage('Erro ao registrar usuário.');
+          this.authService.showMessage('Nome de usuário já utilizado');
         }
       );
     }

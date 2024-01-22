@@ -1,0 +1,17 @@
+<mat-card-container class="dialog-container">
+  <mat-card class="dialog-content">
+
+    <mat-card-header>
+      <mat-card-title class="dialog-title">
+        <mat-form-field class="full-width" align="start" style="width: 140%">
+          <mat-label>Usuário</mat-label>
+          <input matInput [(ngModel)]="username" placeholder="Digite o nome do usuário">
+        </mat-form-field>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="saveList()" class="button" [disabled]="!list.name">Salvar</button>
+    </mat-card-actions>
+  </mat-card>
+</mat-card-container>

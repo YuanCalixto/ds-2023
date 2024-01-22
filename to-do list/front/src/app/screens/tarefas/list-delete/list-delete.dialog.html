@@ -1,0 +1,15 @@
+<form>
+    <h1 mat-dialog-title style="text-align: center;">
+        Deseja remover a lista "{{ list.name }}"?
+    </h1>
+    <div mat-dialog-actions align="center">
+        <button mat-raised-button mat-dialog-close color="warn" type="button">
+            <mat-icon>close</mat-icon>
+            Não
+        </button>
+        <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="primary">
+            Sim
+            <mat-icon>check_circle</mat-icon>
+        </button>
+    </div>
+</form>

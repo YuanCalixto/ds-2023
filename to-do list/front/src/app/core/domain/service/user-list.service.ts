@@ -4,43 +4,46 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, catchError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HandleMessageError } from '../../util/handle-message-error';
+import { UserList } from '../entity/user-list';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService extends HandleMessageError {
+export class UserListService extends HandleMessageError {
   constructor(private http: HttpClient, public override snackBar: MatSnackBar) {
     super(snackBar);
   }
 
-  // FUNCTIONAL
+  // CREATE
 
-  login(loginData: { login: string; password: string }): Observable<any> {
+  createUserList(userList: any): Observable<UserList> {
     return this.http
-      .post<any>(`${environment.serverURL}/auth/login`, loginData)
+      .post<UserList>(`${environment.serverURL}/userLists`, userList)
       .pipe(catchError(this.handleError));
   }
 
-  register(registerData: { login: string; password: string }): Observable<any> {
+  // DELETE
+
+  deleteUserList(userListId: number): Observable<void> {
     return this.http
-      .post<any>(`${environment.serverURL}/auth/register`, registerData)
+      .delete<void>(`${environment.serverURL}/userLists/${userListId}`)
       .pipe(catchError(this.handleError));
   }
 
-  // SAMPLE
+  // GET
 
-  loginSample(loginData: { login: string; password: string }): Observable<any> {
+  getAllUserLists(): Observable<any> {
     return this.http
-      .post<any>(`${environment.serverURL}/users/login`, loginData)
+      .get<any>(`${environment.serverURL}/userLists/all`)
       .pipe(catchError(this.handleError));
   }
 
-  registerSample(registerData: {
-    login: string;
-    password: string;
-  }): Observable<any> {
+  getUserListByUser(userId: string): Observable<UserList[]> {
     return this.http
-      .post<any>(`${environment.serverURL}/users/register`, registerData)
+      .post<UserList[]>(
+        `${environment.serverURL}/userLists/user/${userId}`,
+        null
+      )
       .pipe(catchError(this.handleError));
   }
 }

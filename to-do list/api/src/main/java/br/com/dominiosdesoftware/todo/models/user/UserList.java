@@ -11,24 +11,28 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
+import java.util.UUID;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "tb_list")
+@Table(name = "tb_user_list")
 @Getter
 @Setter
-public class List {
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserList {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id")
-  private Integer id;
-
-  @Column(name = "name")
-  private String name;
+  private UUID id;
 
   @Column(name = "date_created", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
   @CreationTimestamp
@@ -37,6 +41,10 @@ public class List {
   @Column(name = "last_updated", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
   @UpdateTimestamp
   private Date lastUpdated;
+
+  @ManyToOne
+  @JoinColumn(name = "list_id")
+  private List list;
 
   @ManyToOne
   @JoinColumn(name = "user_id")

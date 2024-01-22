@@ -29,13 +29,16 @@
         </mat-chip>
       </mat-chip-list>
       
-      <button mat-icon-button *ngIf="task.id" (click)="toggleTagInput()">
+      <button mat-icon-button *ngIf="task.id" (click)="toggleTagInput()" matTooltip="Adicionar Etiqueta">
         <mat-icon aria-hidden="false" class="add-button">add</mat-icon>
       </button>
       
       <mat-form-field class="form-field" *ngIf="task.id && tagInput">
-        <input matInput [(ngModel)]="newTag" placeholder="Digite o nome da etiqueta" (keydown.enter)="addTag()">
-      </mat-form-field>
+        <mat-label>Nome Etiqueta</mat-label>
+        <input matInput [(ngModel)]="newTag" placeholder="Confirme com Enter" (keydown.enter)="addTag()" name="nomeEtiqueta">
+    </mat-form-field>
+    
+    
       
       
     </mat-card-content>

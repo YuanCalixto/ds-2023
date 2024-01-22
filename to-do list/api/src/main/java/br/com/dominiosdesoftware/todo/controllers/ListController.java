@@ -3,7 +3,13 @@ package br.com.dominiosdesoftware.todo.controllers;
 import br.com.dominiosdesoftware.todo.dtos.inputs.ListInput;
 import br.com.dominiosdesoftware.todo.dtos.outputs.ListOutput;
 import br.com.dominiosdesoftware.todo.models.List;
+import br.com.dominiosdesoftware.todo.models.Tag;
+import br.com.dominiosdesoftware.todo.models.Task;
+import br.com.dominiosdesoftware.todo.models.UserList;
 import br.com.dominiosdesoftware.todo.services.ListService;
+import br.com.dominiosdesoftware.todo.services.TagService;
+import br.com.dominiosdesoftware.todo.services.TaskService;
+import br.com.dominiosdesoftware.todo.services.UserListService;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,22 +30,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class ListController {
 
   private final ListService listService;
+  private final TagService tagService;
+  private final TaskService taskService;
+  private final UserListService userListService;
 
   @Autowired
-  public ListController(ListService listService) {
+  public ListController(ListService listService, TagService tagService, TaskService taskService,
+      UserListService userListService) {
     this.listService = listService;
-  }
-
-  @PostMapping
-  public ResponseEntity<ListOutput> save(@RequestBody ListInput listInput) {
-    List list = new List();
-    list.setName(listInput.name());
-    list.setUser(listInput.user());
-
-    List savedList = listService.save(list);
-    ListOutput listOutput = new ListOutput(savedList);
-
-    return ResponseEntity.status(HttpStatus.CREATED).body(listOutput);
+    this.tagService = tagService;
+    this.taskService = taskService;
+    this.userListService = userListService;
   }
 
   @GetMapping
@@ -53,6 +54,18 @@ public class ListController {
   public ResponseEntity<ListOutput> findById(@PathVariable Integer id) {
     List list = listService.findById(id);
     return ResponseEntity.status(HttpStatus.OK).body(new ListOutput(list));
+  }
+
+  @PostMapping
+  public ResponseEntity<ListOutput> save(@RequestBody ListInput listInput) {
+    List list = new List();
+    list.setName(listInput.name());
+    list.setUser(listInput.user());
+
+    List savedList = listService.save(list);
+    ListOutput listOutput = new ListOutput(savedList);
+
+    return ResponseEntity.status(HttpStatus.CREATED).body(listOutput);
   }
 
   @PostMapping("/user/{userId}")
@@ -74,11 +87,32 @@ public class ListController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<ListOutput> delete(@PathVariable Integer id) {
+  public ResponseEntity<ListOutput> deleteList(@PathVariable Integer id) {
     List list = listService.findById(id);
+
+    java.util.List<Task> tasks = taskService.findByListId(list.getId());
+
+    java.util.List<UserList> userLists = userListService.findByListId(list.getId());
+
+    for (UserList userList : userLists) {
+      userListService.delete(userList);
+    }
+
+    for (Task task : tasks) {
+      java.util.List<Tag> tags = tagService.findByTaskId(task.getId());
+
+      for (Tag tag : tags) {
+        tagService.delete(tag);
+      }
+
+      taskService.delete(task);
+    }
+
     listService.delete(list);
+
     return ResponseEntity.status(HttpStatus.OK).body(new ListOutput(list));
   }
+
 }
 
 

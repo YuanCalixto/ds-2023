@@ -3,10 +3,11 @@ package br.com.dominiosdesoftware.todo.controllers;
 import br.com.dominiosdesoftware.todo.dtos.inputs.TaskInput;
 import br.com.dominiosdesoftware.todo.dtos.outputs.TaskOutput;
 import br.com.dominiosdesoftware.todo.models.List;
+import br.com.dominiosdesoftware.todo.models.Tag;
 import br.com.dominiosdesoftware.todo.models.Task;
 import br.com.dominiosdesoftware.todo.services.ListService;
+import br.com.dominiosdesoftware.todo.services.TagService;
 import br.com.dominiosdesoftware.todo.services.TaskService;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,29 +27,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class TaskController {
 
   private final ListService listService;
+  private final TagService tagService;
   private final TaskService taskService;
 
   @Autowired
-  public TaskController(ListService listService, TaskService taskService) {
+  public TaskController(ListService listService, TagService tagService, TaskService taskService) {
     this.listService = listService;
+    this.tagService = tagService;
     this.taskService = taskService;
-  }
-
-  @PostMapping
-  public ResponseEntity<TaskOutput> save(@RequestBody TaskInput taskInput) {
-    List list = listService.findById(taskInput.listId());
-
-    Task task = new Task();
-    task.setName(taskInput.name());
-    task.setDescription(taskInput.description());
-    task.setUser(taskInput.user());
-    task.setList(list);
-
-    Task savedTask = taskService.save(task);
-
-    TaskOutput taskOutput = new TaskOutput(savedTask);
-
-    return ResponseEntity.status(HttpStatus.CREATED).body(taskOutput);
   }
 
   @GetMapping
@@ -74,6 +60,22 @@ public class TaskController {
     return ResponseEntity.status(HttpStatus.OK).body(taskOutput);
   }
 
+  @PostMapping
+  public ResponseEntity<TaskOutput> save(@RequestBody TaskInput taskInput) {
+    List list = listService.findById(taskInput.listId());
+
+    Task task = new Task();
+    task.setName(taskInput.name());
+    task.setDescription(taskInput.description());
+    task.setUser(taskInput.user());
+    task.setList(list);
+
+    Task savedTask = taskService.save(task);
+
+    TaskOutput taskOutput = new TaskOutput(savedTask);
+
+    return ResponseEntity.status(HttpStatus.CREATED).body(taskOutput);
+  }
 
   @PutMapping("/{id}")
   public ResponseEntity<TaskOutput> update(@PathVariable Integer id, @RequestBody TaskInput taskInput) {
@@ -84,7 +86,6 @@ public class TaskController {
     task.setCompleted(taskInput.completed());
     Task updatedTodo = taskService.save(task);
 
-
     TaskOutput taskOutput = new TaskOutput(updatedTodo);
 
     return ResponseEntity.status(HttpStatus.OK).body(taskOutput);
@@ -93,6 +94,12 @@ public class TaskController {
   @DeleteMapping("/{id}")
   public ResponseEntity<TaskOutput> delete(@PathVariable Integer id) {
     Task task = taskService.findById(id);
+
+    java.util.List<Tag> tags = tagService.findByTaskId(task.getId());
+    for (Tag tag : tags) {
+      tagService.delete(tag);
+    }
+
     taskService.delete(task);
     TaskOutput taskOutput = new TaskOutput(task);
 
