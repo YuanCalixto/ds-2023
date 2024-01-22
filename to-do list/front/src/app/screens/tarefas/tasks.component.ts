@@ -10,6 +10,7 @@ import { TaskService } from 'src/app/core/domain/service/task.service';
 import { UserListService } from 'src/app/core/domain/service/user-list.service';
 import { ListDeleteDialog } from './list-delete/list-delete.dialog';
 import { ListDetailsDialog } from './list-details/list-details.dialog';
+import { ProfileDialog } from './profile/profile.dialog';
 import { ShareListDialog } from './share-list/share-list.dialog';
 import { TaskDeleteDialog } from './task-delete/task-delete.dialog';
 import { TasksDetailsDialog } from './task-details/tasks-details.dialog';
@@ -48,9 +49,17 @@ export class TasksComponent implements OnInit {
 
     this.darkMode = darkModeValue === 'true';
 
+    this.isUserLogged();
     this.loadAllListsByUser();
     this.loadAllSharedListsByUser();
     this.loadTasksFromFirstList();
+  }
+
+  isUserLogged(): void {
+    const user = localStorage.getItem('usuarioLogado');
+    if (!user) {
+      this.exit();
+    }
   }
 
   loadAllListsByUser(): void {
@@ -287,6 +296,17 @@ export class TasksComponent implements OnInit {
     this.selectedListId = listId.toString();
 
     this.loadTasksFromSelectedList();
+  }
+
+  editProfile(): void {
+    const dialogRef = this.dialog.open(ProfileDialog, {
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+      }
+    });
   }
 
   exit() {
