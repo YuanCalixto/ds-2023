@@ -83,6 +83,8 @@
             <div class="list-container">
 
                 <h1 *ngIf="selectedListId == ''" style="text-align: center; margin-top: 5%;">Sem lista selecionada!</h1>
+                <h1 *ngIf="tasks.length < 1 && selectedListId != '' " style="text-align: center; margin-top: 5%;">Lista vazia! Adicione tarefas para começar</h1>
+
                 <mat-list>
                         <mat-list-item *ngFor="let task of tasks" class="list-item">
                             <mat-checkbox [(ngModel)]="task.completed" (change)="setCompleted(task)">
