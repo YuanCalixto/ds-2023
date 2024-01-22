@@ -43,4 +43,11 @@ export class AuthService extends HandleMessageError {
       .post<any>(`${environment.serverURL}/users/register`, registerData)
       .pipe(catchError(this.handleError));
   }
+
+  updateUserSample(userInput: any): Observable<any> {
+    const url = `${environment.serverURL}/users/update/${userInput.id}`;
+    return this.http
+      .put<any>(url, { login: userInput.login, password: userInput.password })
+      .pipe(catchError(this.handleError));
+  }
 }

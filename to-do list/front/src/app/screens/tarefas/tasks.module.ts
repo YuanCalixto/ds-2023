@@ -12,6 +12,7 @@ import { UserListService } from 'src/app/core/domain/service/user-list.service';
 import { MaterialModule } from 'src/app/core/material/material.module';
 import { ListDeleteModule } from './list-delete/list-delete.module';
 import { ListDetailsModule } from './list-details/list-details.module';
+import { ProfileModule } from './profile/profile.module';
 import { ShareListModule } from './share-list/share-list.module';
 import { TaskDeleteModule } from './task-delete/task-delete.module';
 import { TasksDetailsModule } from './task-details/tasks-details.module';
@@ -30,6 +31,7 @@ import { TasksComponent } from './tasks.component';
     MaterialModule,
     MatIconModule,
 
+    ProfileModule,
     ListDeleteModule,
     ListDetailsModule,
     ShareListModule,

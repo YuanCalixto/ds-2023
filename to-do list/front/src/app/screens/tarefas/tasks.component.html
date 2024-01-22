@@ -72,8 +72,12 @@
         
             <span class="spacer"></span> 
         
+            <button (click)="editProfile()">
+                <mat-icon style="color: #2ae37f; margin-right: 10px; border: none;" matTooltip="Editar Perfil">account_circle</mat-icon>
+            </button>
+
             <button (click)="exit()">
-                <mat-icon style="color: #2ae37f">logout</mat-icon>
+                <mat-icon style="color: #2ae37f" matTooltip="Sair">logout</mat-icon>
             </button>
         </mat-toolbar>
         
