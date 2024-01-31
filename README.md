@@ -125,4 +125,4 @@ API REST utilizando Java com Spring Boot
 | 2 | Desenvolvimento das Funcionalidades Principais | 27/11/2023 | 22/11/2023 | Concluída |
 | 3 | Refinamento e Adição de Recursos Extras | 08/01/2023 | 15/11/2023 | Concluída |
 | 4 | Testes e Correções Baseados no Feedback do Docente | 15/01/2023 | 22/01/2023 | Concluída |
-| 5 | Versão Final e Apresentação | 23/01/2023 | 31/01/2023 | Em Andamento |
+| 5 | Versão Final e Apresentação | 23/01/2023 | 31/01/2023 | Concluída |
